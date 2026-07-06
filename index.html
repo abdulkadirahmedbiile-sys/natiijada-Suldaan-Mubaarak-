@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIILE EXAMINATION BOARD BEB - RESULTS</title>
+    <style>
+        :root { --primary: #1e3a8a; --bg: #f3f4f6; --dark: #1f2937; }
+        body { font-family: Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; max-width: 500px; text-align: center; box-sizing: border-box; }
+        
+        /* Qaybta Logo-ga ee la habeeyay si sawirku u soo baxo oo dhan */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .portal-logo {
+            width: 100%;
+            max-width: 160px; /* Halkan kor ama hoos ugu rari karto weyninka logo-ga */
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        h1 { color: var(--primary); font-size: 22px; margin: 0 0 5px; text-transform: uppercase; }
+        h2 { color: #6b7280; font-size: 14px; margin: 0 0 25px; }
+        .input-group { text-align: left; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #4b5563; font-size: 14px; }
+        input { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        input:focus { border-color: #3b82f6; outline: none; }
+        button { width: 100%; background: var(--primary); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .error { display: none; background: #fee2e2; color: #dc2626; padding: 10px; border-radius: 6px; margin-top: 15px; font-size: 14px; font-weight: 500; }
+        .result { display: none; margin-top: 25px; padding: 20px; border-radius: 10px; background: #fafafa; border: 1px solid #e5e7eb; text-align: left; }
+        .result h3 { margin: 0 0 15px; color: var(--primary); text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+        .row-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+        .row-item:last-child { border: none; }
+        .lbl { font-weight: bold; color: #6b7280; }
+        .val { color: var(--dark); font-weight: 500; }
+        .badge { padding: 2px 8px; border-radius: 12px; font-weight: bold; font-size: 12px; text-transform: uppercase; }
+        .pass { background: #dcfce7; color: #16a34a; }
+        .fail { background: #fee2e2; color: #dc2626; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- Qaybta HTML ee logo-ga oo loo dhiibay class-ka saxda ah -->
+    <div class="logo-container">
+        <img src="LOGOJPG.jpg.jpeg" alt="Logo" class="portal-logo">
+    </div>
+    
+    <h1>BIILE EXAMINATION BOARD BEB</h1>
+    <h2>Academic Year: 2025 - 2026</h2>
+    
+    <div class="input-group">
+        <label for="rollNo">Geli Roll Number-kaaga:</label>
+        <input type="text" id="rollNo" placeholder="Tusaale: SM260010...">
+    </div>
+    
+    <button onclick="searchResult()">Raadi Natiijada</button>
+    <div id="error" class="error">Roll Number-kaas waa khalad! Ka hubi kaarkaagii imtixaanka.</div>
+
+    <div id="result" class="result">
+        <h3>NATIIJADAADA WAA TAN</h3>
+        <div class="row-item"><span class="lbl">Magaca:</span> <span class="val" id="rName"></span></div>
+        <div class="row-item"><span class="lbl">Roll Number:</span> <span class="val" id="rRoll"></span></div>
+        <div class="row-item"><span class="lbl">Total:</span> <span class="val" id="rTotal"></span></div>
+        <div class="row-item"><span class="lbl">Average:</span> <span class="val" id="rAvg"></span></div>
+        <div class="row-item"><span class="lbl">Grade:</span> <span class="val" id="rGrade"></span></div>
+        <div class="row-item"><span class="lbl">Status:</span> <span id="rStatus" class="badge"></span></div>
+    </div>
+</div>
+
+<script>
+    const ardaydaXogta = {
+        "SM26001000": { name: "AYAAN CABDI AXMED", total: "1059", avg: "96.27", grade: "A+", status: "PASS" },
+        "SM26001002": { name: "AMIINO CUMAR C/LAAHI", total: "949", avg: "86.27", grade: "A", status: "PASS" },
+        "YK26001006": { name: "FAWSIYO C/QADIR MAXAMED", total: "944", avg: "85.81", grade: "A", status: "PASS" },
+        "YK26001003": { name: "DEEQO C/RASHID MAXAMED", total: "942", avg: "85.63", grade: "A", status: "PASS" },
+        "YK26001001": { name: "ASIYO MAXAMED BARRE", total: "933", avg: "84.81", grade: "B+", status: "PASS" },
+        "YK26001004": { name: "ASMAA SICIID MAXAMED", total: "868", avg: "78.90", grade: "B", status: "PASS" },
+        "YK26001005": { name: "C/MALIK CISMAAN C/LAHI", total: "864", avg: "78.54", grade: "B", status: "PASS" },
+        "YK26001009": { name: "ASMAA YAASIIN AXMED", total: "842", avg: "76.54", grade: "B", status: "PASS" },
+        "YK26001011": { name: "Maxamud Abshir Siciid", total: "818", avg: "74.36", grade: "B-", status: "PASS" },
+        "YK26001007": { name: "XAFSO XASAN CISMAAN", total: "807", avg: "73.36", grade: "B-", status: "PASS" },
+        "YK26001010": { name: "MUXIIDIN AXMED MAXAMED", total: "799", avg: "72.63", grade: "B-", status: "PASS" },
+        "YK26001008": { name: "MAXAMUD CISMAAN CAJAB", total: "768", avg: "69.81", grade: "C+", status: "PASS" },
+        "YK26001017": { name: "AYUUB C/CASIIS XASAN", total: "824", avg: "74.90", grade: "B-", status: "PASS" },
+        "YK26001018": { name: "FADUMO CISMAAN C/LAHI", total: "798", avg: "72.54", grade: "B-", status: "PASS" },
+        "YK26001014": { name: "MUKHTAR AXMED MAXAMED", total: "792", avg: "72.00", grade: "B-", status: "PASS" },
+        "YK26001013": { name: "MAXAMED C/MALIK KHALIIF", total: "786", avg: "71.45", grade: "B-", status: "PASS" },
+        "YK26001012": { name: "MAXAMED MAXAMUD CABDI", total: "752", avg: "68.36", grade: "C+", status: "PASS" },
+        "YK26001015": { name: "C/LAAHI MAXAMED C/LAHI", total: "713", avg: "64.81", grade: "C", status: "PASS" },
+        "YK26001016": { name: "AXMED C/RASHID XASAN", total: "645", avg: "58.22", grade: "C", status: "PASS" },
+        "YK26001030": { name: "FADUMO XISRI MAXAMUD", total: "1053", avg: "95.72", grade: "A+", status: "PASS" },
+        "YK26001031": { name: "XUBBI AXMED JAAMAC", total: "947", avg: "86.09", grade: "A", status: "PASS" },
+        "YK26001020": { name: "C/SHAKUR C/XALIF MAXA'D", total: "938", avg: "85.27", grade: "A", status: "PASS" },
+        "YK26001019": { name: "MAXAMED C/QANI CALI", total: "878", avg: "79.81", grade: "B", status: "PASS" },
+        "YK26001029": { name: "MAXAMED XUSEEN C/QADIR", total: "801", avg: "72.81", grade: "B-", status: "PASS" },
+        "YK26001028": { name: "C/WAASAC C/RASAAQ AXMED", total: "783", avg: "71.18", grade: "B-", status: "PASS" },
+        "YK26001033": { name: "SAKARIYE JAAMAC CABDI", total: "772", avg: "70.18", grade: "B-", status: "PASS" },
+        "YK26001027": { name: "SAKARIYE MAXAMED BARRE", total: "764", avg: "69.45", grade: "C+", status: "PASS" },
+        "YK26001023": { name: "MAXAMED C/RISAAQ KHALIF", total: "763", avg: "69.36", grade: "C+", status: "PASS" },
+        "YK26001025": { name: "MAXAMUD MAXAMED CUMAR", total: "745", avg: "67.72", grade: "C", status: "PASS" },
+        "YK26001022": { name: "USAAME SICIID CABDI", total: "707", avg: "64.27", grade: "C", status: "PASS" },
+        "YK26001034": { name: "C/LAAHI ABSHIR SICIID", total: "681", avg: "61.90", grade: "C-", status: "PASS" },
+        "YK26001024": { name: "AXMED MAXAMED AXMED", total: "675", avg: "61.36", grade: "C-", status: "PASS" },
+        "YK26001032": { name: "AXMED MAXAMED BARRE", total: "670", avg: "60.90", grade: "C-", status: "PASS" },
+        "YK26001035": { name: "CUMAR MAXAMUD XIRSI", total: "663", avg: "60.27", grade: "C-", status: "PASS" },
+        "YK26001021": { name: "C/LADIF C/LAHI MAXAMED", total: "662", avg: "60.18", grade: "C-", status: "PASS" },
+        "YK26001026": { name: "NUUR CISMAAN MAXAMED", total: "660", avg: "60.00", grade: "C-", status: "PASS" }
+    };
+
+    function searchResult() {
+        const input = document.getElementById('rollNo').value.trim().toUpperCase();
+        const resBox = document.getElementById('result');
+        const errBox = document.getElementById('error');
+        if(!input) { alert("Fadlan qor Roll Number-ka!"); return; }
+
+        const student = ardaydaXogta[input];
+
+        if(student) {
+            errBox.style.display = "none";
+            document.getElementById('rName').innerText = student.name;
+            document.getElementById('rRoll').innerText = input;
+            document.getElementById('rTotal').innerText = student.total;
+            document.getElementById('rAvg').innerText = student.avg;
+            document.getElementById('rGrade').innerText = student.grade;
+            
+            const status = document.getElementById('rStatus');
+            status.innerText = student.status;
+            
+            // Xaqiijinta in style-ka badjiga uu u beddelmo si sax ah
+            if(student.status === 'PASS') {
+                status.className = "badge pass";
+            } else {
+                status.className = "badge fail";
+            }
+            
+            resBox.style.display = "block";
+        } else {
+            resBox.style.display = "none"; 
+            errBox.style.display = "block";
+        }
+    }
+</script>
+</body>
+</html>
