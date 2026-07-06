@@ -1,1 +1,0 @@
-# natiijada-Suldaan-Mubaarak-
