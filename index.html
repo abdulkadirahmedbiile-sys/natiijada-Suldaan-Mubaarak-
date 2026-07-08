@@ -1,1 +1,217 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIILE EXAMINATION BOARD (BEB)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 550px;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        h2 {
+            color: #1a365d;
+            margin-bottom: 5px;
+            font-size: 22px;
+        }
+        h3 {
+            color: #4a5568;
+            margin-bottom: 25px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #1a365d;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a365d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #2b6cb0;
+        }
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 6px;
+            display: none;
+            text-align: left;
+        }
+        .error {
+            background-color: #fed7d7;
+            color: #9b2c2c;
+            border-left: 5px solid #e53e3e;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .success {
+            background-color: #f7fafc;
+            color: #2d3748;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #1a365d;
+        }
+        .result-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <img src="logo.jpeg" alt="BEB Logo" class="logo">
+    
+    <h2>BIILE EXAMINATION BOARD</h2>
+    <h3>(BEB)</h3>
+
+    <div class="form-group">
+        <label for="studentId">Geli Roll No kaaga:</label>
+        <input type="text" id="studentId" placeholder="Tusaale: YK260010...">
+    </div>
+
+    <button onclick="checkResult()">Hel Natiijadaada</button>
+
+    <div id="result" class="result-box"></div>
+</div>
+
+<script>
+    const studentsData = {
+        "YK26001000": { name: "AYAAN CABDI XAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 92, math: 81, som: 100, bio: 95, chem: 96, ict: 97, eng: 98, geo: 100, his: 100, total: 1059, avg: "96.27", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "YK26001030": { name: "FADUMO XIISRI MAXAMUD", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 100, arabi: 96, phy: 100, math: 94, som: 96, bio: 90, chem: 95, ict: 100, eng: 90, geo: 99, his: 93, total: 1053, avg: "95.73", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "YK26001002": { name: "AMINO CUMAR C/LAAHI", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 92, arabi: 96, phy: 68, math: 60, som: 100, bio: 70, chem: 90, ict: 93, eng: 95, geo: 92, his: 93, total: 949, avg: "86.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "YK26001031": { name: "XUBBI AXMED JAAMAC", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 95, arabi: 90, phy: 89, math: 70, som: 88, bio: 80, chem: 70, ict: 96, eng: 86, geo: 93, his: 90, total: 947, avg: "86.09", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "YK26001006": { name: "FAWSIYO C/QADIR MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 89, arabi: 100, phy: 66, math: 56, som: 88, bio: 81, chem: 83, ict: 94, eng: 93, geo: 98, his: 96, total: 944, avg: "85.82", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "YK26001003": { name: "DEEQO C/RASHIID MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 89, arabi: 100, phy: 68, math: 60, som: 50, bio: 71, chem: 75, ict: 100, eng: 93, geo: 90, his: 96, total: 942, avg: "85.64", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "YK26001020": { name: "C/SHAKUR C/KHALIF MAXU'D", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 78, math: 60, som: 86, bio: 72, chem: 87, ict: 100, eng: 95, geo: 97, his: 80, total: 938, avg: "85.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "YK26001001": { name: "ASIYO MAXAMED BARRE", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 86, math: 70, som: 100, bio: 70, chem: 55, ict: 80, eng: 83, geo: 93, his: 96, total: 933, avg: "84.82", grade: "B+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "YK26001019": { name: "MAXAMED C/QANI CALI", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 66, math: 50, som: 92, bio: 64, chem: 50, ict: 88, eng: 94, geo: 93, his: 98, total: 878, avg: "79.82", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "YK26001004": { name: "ASMAA SIICID MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 51, arabi: 91, phy: 65, math: 60, som: 100, bio: 54, chem: 70, ict: 100, eng: 93, geo: 88, his: 96, total: 868, avg: "78.91", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "YK26001005": { name: "C/MALIK CISMAN C/LAHI", school:"YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 61, math: 56, som:96, bio: 76, chem: 60, ict: 80, eng: 75, geo: 70, his:95, total: 864, avg: "78.55", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false }
+    };
+
+    function checkResult() {
+        const idInput = document.getElementById("studentId").value.trim().toUpperCase();
+        const resultDiv = document.getElementById("result");
+        
+        resultDiv.style.display = "none";
+        resultDiv.className = "result-box";
+        resultDiv.innerHTML = "";
+
+        if (idInput === "") {
+            resultDiv.style.display = "block";
+            resultDiv.classList.add("error");
+            resultDiv.innerHTML = "Fadlan geli Roll No.";
+            return;
+        }
+
+        const student = studentsData[idInput];
+
+        if (student) {
+            if (student.hasDebt) {
+                resultDiv.style.display = "block";
+                resultDiv.classList.add("error");
+                resultDiv.innerHTML = "FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.";
+            } else {
+                resultDiv.style.display = "block";
+                resultDiv.classList.add("success");
+                resultDiv.innerHTML = `
+                    <div class="result-title">NATIIJADA ARDAYGA</div>
+                    
+                    <div style="background: #edf2f7; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Magaca:</span> ${student.name}</div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Roll No:</span> ${idInput}</div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Iskuulka:</span> ${student.school}</div>
+                    </div>
+
+                    <div style="font-weight:bold; color:#1a365d; margin-bottom:8px; font-size: 15px;">NATIIJADA MAADOOYINKA:</div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; background: #fff; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                        <div style="display:flex; justify-content:space-between;"><span>Islam:</span> <span>${student.islam}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Arabi:</span> <span>${student.arabi}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Phy:</span> <span>${student.phy}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Math:</span> <span>${student.math}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Som:</span> <span>${student.som}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Bio:</span> <span>${student.bio}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Chem:</span> <span>${student.chem}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Ict:</span> <span>${student.ict}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Eng:</span> <span>${student.eng}</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>Geo:</span> <span>${student.geo}</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>His:</span> <span>${student.his}</span></div>
+                </div>
+
+                <div style="margin-top: 15px; background: #e6fffa; padding: 10px; border-radius: 6px; font-size: 14px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>WADARTA GUUD (Total):</span> ${student.total}</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>Celcelis (Avg):</span> ${student.avg}%</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>Darajo (Grade):</span> ${student.grade}</div>
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; color:#234e52;"><span>Xaaladda (Status):</span> ${student.status}</div>
+                </div>
+
+                <div style="margin-top: 12px; font-size: 12px; text-align: center; color: #718096; font-style: italic;">Maamulaha Imtixaanaadka heer degmo: ${student.admin}</div>
+            `;
+        }
+    } else {
+        resultDiv.style.display = "block";
+        resultDiv.classList.add("error");
+        resultDiv.innerHTML = "Ma jiro arday leh Roll No-gaan. Fadlan hubi.";
+    }
+}
+</script>
+
+</body>
+</html>
