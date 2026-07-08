@@ -116,14 +116,14 @@
 <body>
 
 <div class="container">
-    <img src="logo.jpeg" alt="BEB Logo" class="logo">
+    <img src="Logo.jpeg" alt="BEB Logo" class="logo">
     
     <h2>BIILE EXAMINATION BOARD</h2>
     <h3>(BEB)</h3>
 
     <div class="form-group">
         <label for="studentId">Geli Roll No kaaga:</label>
-        <input type="text" id="studentId" placeholder="Tusaale: YK260010...">
+        <input type="text" id="studentId" placeholder="Tusaale: SM260010...">
     </div>
 
     <button onclick="checkResult()">Hel Natiijadaada</button>
@@ -133,17 +133,17 @@
 
 <script>
     const studentsData = {
-        "YK26001000": { name: "AYAAN CABDI XAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 92, math: 81, som: 100, bio: 95, chem: 96, ict: 97, eng: 98, geo: 100, his: 100, total: 1059, avg: "96.27", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "YK26001030": { name: "FADUMO XIISRI MAXAMUD", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 100, arabi: 96, phy: 100, math: 94, som: 96, bio: 90, chem: 95, ict: 100, eng: 90, geo: 99, his: 93, total: 1053, avg: "95.73", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "YK26001002": { name: "AMINO CUMAR C/LAAHI", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 92, arabi: 96, phy: 68, math: 60, som: 100, bio: 70, chem: 90, ict: 93, eng: 95, geo: 92, his: 93, total: 949, avg: "86.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "YK26001031": { name: "XUBBI AXMED JAAMAC", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 95, arabi: 90, phy: 89, math: 70, som: 88, bio: 80, chem: 70, ict: 96, eng: 86, geo: 93, his: 90, total: 947, avg: "86.09", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "YK26001006": { name: "FAWSIYO C/QADIR MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 89, arabi: 100, phy: 66, math: 56, som: 88, bio: 81, chem: 83, ict: 94, eng: 93, geo: 98, his: 96, total: 944, avg: "85.82", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "YK26001003": { name: "DEEQO C/RASHIID MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 89, arabi: 100, phy: 68, math: 60, som: 50, bio: 71, chem: 75, ict: 100, eng: 93, geo: 90, his: 96, total: 942, avg: "85.64", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "YK26001020": { name: "C/SHAKUR C/KHALIF MAXU'D", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 78, math: 60, som: 86, bio: 72, chem: 87, ict: 100, eng: 95, geo: 97, his: 80, total: 938, avg: "85.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "YK26001001": { name: "ASIYO MAXAMED BARRE", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 86, math: 70, som: 100, bio: 70, chem: 55, ict: 80, eng: 83, geo: 93, his: 96, total: 933, avg: "84.82", grade: "B+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "YK26001019": { name: "MAXAMED C/QANI CALI", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 66, math: 50, som: 92, bio: 64, chem: 50, ict: 88, eng: 94, geo: 93, his: 98, total: 878, avg: "79.82", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "YK26001004": { name: "ASMAA SIICID MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 51, arabi: 91, phy: 65, math: 60, som: 100, bio: 54, chem: 70, ict: 100, eng: 93, geo: 88, his: 96, total: 868, avg: "78.91", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "YK26001005": { name: "C/MALIK CISMAN C/LAHI", school:"YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 61, math: 56, som:96, bio: 76, chem: 60, ict: 80, eng: 75, geo: 70, his:95, total: 864, avg: "78.55", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false }
+        "SM26001000": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 92, math: 81, som: 100, bio: 95, chem: 96, ict: 97, eng: 98, geo: 100, his: 100, total: 1059, avg: "96.27", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001030": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 96, phy: 100, math: 94, som: 96, bio: 90, chem: 95, ict: 100, eng: 90, geo: 99, his: 93, total: 1053, avg: "95.73", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001002": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 92, arabi: 96, phy: 68, math: 60, som: 100, bio: 70, chem: 90, ict: 93, eng: 95, geo: 92, his: 93, total: 949, avg: "86.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "SM26001031": { name: "XUBBI AXMED JAAMAC", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 95, arabi: 90, phy: 89, math: 70, som: 88, bio: 80, chem: 70, ict: 96, eng: 86, geo: 93, his: 90, total: 947, avg: "86.09", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "SM26001006": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 89, arabi: 100, phy: 66, math: 56, som: 88, bio: 81, chem: 83, ict: 94, eng: 93, geo: 98, his: 96, total: 944, avg: "85.82", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "SM26001003": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 89, arabi: 100, phy: 68, math: 60, som: 50, bio: 71, chem: 75, ict: 100, eng: 93, geo: 90, his: 96, total: 942, avg: "85.64", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001020": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 91, arabi: 92, phy: 78, math: 60, som: 86, bio: 72, chem: 87, ict: 100, eng: 95, geo: 97, his: 80, total: 938, avg: "85.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001001": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 86, math: 70, som: 100, bio: 70, chem: 55, ict: 80, eng: 83, geo: 93, his: 96, total: 933, avg: "84.82", grade: "B+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001019": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 91, arabi: 92, phy: 66, math: 50, som: 92, bio: 64, chem: 50, ict: 88, eng: 94, geo: 93, his: 98, total: 878, avg: "79.82", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001004": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 51, arabi: 91, phy: 65, math: 60, som: 100, bio: 54, chem: 70, ict: 100, eng: 93, geo: 88, his: 96, total: 868, avg: "78.91", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "SM26001005": { name: "LAMA YAQAANO", school:"SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 61, math: 56, som:96, bio: 76, chem: 60, ict: 80, eng: 75, geo: 70, his:95, total: 864, avg: "78.55", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true }
     };
 
     function checkResult() {
