@@ -122,6 +122,16 @@
     <h3>(BEB)</h3>
 
     <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Geli Username-kaaga">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Geli Password-kaaga">
+    </div>
+
+    <div class="form-group">
         <label for="studentId">Geli Roll No kaaga:</label>
         <input type="text" id="studentId" placeholder="Tusaale: SM260010...">
     </div>
@@ -132,21 +142,18 @@
 </div>
 
 <script>
+    // Kaliya 5ta arday ee ugu horreysa ayaa halkan ku jira hadda
     const studentsData = {
-        "SM26001000": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 92, math: 81, som: 100, bio: 95, chem: 96, ict: 97, eng: 98, geo: 100, his: 100, total: 1059, avg: "96.27", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "SM26001030": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 96, phy: 100, math: 94, som: 96, bio: 90, chem: 95, ict: 100, eng: 90, geo: 99, his: 93, total: 1053, avg: "95.73", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "SM26001002": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 92, arabi: 96, phy: 68, math: 60, som: 100, bio: 70, chem: 90, ict: 93, eng: 95, geo: 92, his: 93, total: 949, avg: "86.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "SM26001031": { name: "XUBBI AXMED JAAMAC", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 95, arabi: 90, phy: 89, math: 70, som: 88, bio: 80, chem: 70, ict: 96, eng: 86, geo: 93, his: 90, total: 947, avg: "86.09", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "SM26001006": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 89, arabi: 100, phy: 66, math: 56, som: 88, bio: 81, chem: 83, ict: 94, eng: 93, geo: 98, his: 96, total: 944, avg: "85.82", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "SM26001003": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 89, arabi: 100, phy: 68, math: 60, som: 50, bio: 71, chem: 75, ict: 100, eng: 93, geo: 90, his: 96, total: 942, avg: "85.64", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "SM26001020": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 91, arabi: 92, phy: 78, math: 60, som: 86, bio: 72, chem: 87, ict: 100, eng: 95, geo: 97, his: 80, total: 938, avg: "85.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "SM26001001": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 86, math: 70, som: 100, bio: 70, chem: 55, ict: 80, eng: 83, geo: 93, his: 96, total: 933, avg: "84.82", grade: "B+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "SM26001019": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 91, arabi: 92, phy: 66, math: 50, som: 92, bio: 64, chem: 50, ict: 88, eng: 94, geo: 93, his: 98, total: 878, avg: "79.82", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-        "SM26001004": { name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 51, arabi: 91, phy: 65, math: 60, som: 100, bio: 54, chem: 70, ict: 100, eng: 93, geo: 88, his: 96, total: 868, avg: "78.91", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-        "SM26001005": { name: "LAMA YAQAANO", school:"SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 61, math: 56, som:96, bio: 76, chem: 60, ict: 80, eng: 75, geo: 70, his:95, total: 864, avg: "78.55", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true }
+        "SM26001000": { username: "student1", password: "pass123", name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 100, phy: 92, math: 81, som: 100, bio: 95, chem: 96, ict: 97, eng: 98, geo: 100, his: 100, total: 1059, avg: "96.27", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001030": { username: "student2", password: "pass123", name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 100, arabi: 96, phy: 100, math: 94, som: 96, bio: 90, chem: 95, ict: 100, eng: 90, geo: 99, his: 93, total: 1053, avg: "95.73", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
+        "SM26001002": { username: "student3", password: "pass123", name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 92, arabi: 96, phy: 68, math: 60, som: 100, bio: 70, chem: 90, ict: 93, eng: 95, geo: 92, his: 93, total: 949, avg: "86.27", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "SM26001031": { username: "student4", password: "pass123", name: "XUBBI AXMED JAAMAC", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 95, arabi: 90, phy: 89, math: 70, som: 88, bio: 80, chem: 70, ict: 96, eng: 86, geo: 93, his: 90, total: 947, avg: "86.09", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+        "SM26001006": { username: "student5", password: "pass123", name: "LAMA YAQAANO", school: "SULDAN MUBARIK HIGH SCHOOL", class: "LAMA YAQAANO", islam: 89, arabi: 100, phy: 66, math: 56, som: 88, bio: 81, chem: 83, ict: 94, eng: 93, geo: 98, his: 96, total: 944, avg: "85.82", grade: "A", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true }
     };
 
     function checkResult() {
+        const usernameInput = document.getElementById("username").value.trim();
+        const passwordInput = document.getElementById("password").value.trim();
         const idInput = document.getElementById("studentId").value.trim().toUpperCase();
         const resultDiv = document.getElementById("result");
         
@@ -154,63 +161,64 @@
         resultDiv.className = "result-box";
         resultDiv.innerHTML = "";
 
-        if (idInput === "") {
+        if (usernameInput === "" || passwordInput === "" || idInput === "") {
             resultDiv.style.display = "block";
             resultDiv.classList.add("error");
-            resultDiv.innerHTML = "Fadlan geli Roll No.";
+            resultDiv.innerHTML = "Fadlan buuxi Username, Password iyo Roll No dhammaantood.";
             return;
         }
 
         const student = studentsData[idInput];
 
         if (student) {
-            if (student.hasDebt) {
-                resultDiv.style.display = "block";
-                resultDiv.classList.add("error");
-                resultDiv.innerHTML = "FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.";
+            if (student.username === usernameInput && student.password === passwordInput) {
+                if (student.hasDebt) {
+                    resultDiv.style.display = "block";
+                    resultDiv.classList.add("error");
+                    resultDiv.innerHTML = "FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.";
+                } else {
+                    resultDiv.style.display = "block";
+                    resultDiv.classList.add("success");
+                    resultDiv.innerHTML = `
+                        <div class="result-title">NATIIJADA ARDAYGA</div>
+                        
+                        <div style="background: #edf2f7; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
+                            <strong>Magaca:</strong> ${student.name}<br>
+                            <strong>Iskuulka:</strong> ${student.school}<br>
+                            <strong>Fasalka:</strong> ${student.class}<br>
+                            <strong>Celcelis (Avg):</strong> ${student.avg}% | <strong>Grade:</strong> ${student.grade}<br>
+                            <strong>Status:</strong> <span style="color: green; font-weight: bold;">${student.status}</span>
+                        </div>
+                        
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            • Islam: ${student.islam}<br>
+                            • Arabi: ${student.arabi}<br>
+                            • Physics: ${student.phy}<br>
+                            • Maths: ${student.math}<br>
+                            • Somali: ${student.som}<br>
+                            • Biology: ${student.bio}<br>
+                            • Chemistry: ${student.chem}<br>
+                            • ICT: ${student.ict}<br>
+                            • English: ${student.eng}<br>
+                            • Geography: ${student.geo}<br>
+                            • History: ${student.his}<br>
+                            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #cbd5e0;">
+                            <strong>Total Score:</strong> ${student.total}<br>
+                            <strong>Maamulaha:</strong> ${student.admin}
+                        </div>
+                    `;
+                }
             } else {
                 resultDiv.style.display = "block";
-                resultDiv.classList.add("success");
-                resultDiv.innerHTML = `
-                    <div class="result-title">NATIIJADA ARDAYGA</div>
-                    
-                    <div style="background: #edf2f7; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Magaca:</span> ${student.name}</div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Roll No:</span> ${idInput}</div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Iskuulka:</span> ${student.school}</div>
-                    </div>
-
-                    <div style="font-weight:bold; color:#1a365d; margin-bottom:8px; font-size: 15px;">NATIIJADA MAADOOYINKA:</div>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; background: #fff; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
-                        <div style="display:flex; justify-content:space-between;"><span>Islam:</span> <span>${student.islam}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Arabi:</span> <span>${student.arabi}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Phy:</span> <span>${student.phy}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Math:</span> <span>${student.math}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Som:</span> <span>${student.som}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Bio:</span> <span>${student.bio}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Chem:</span> <span>${student.chem}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Ict:</span> <span>${student.ict}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Eng:</span> <span>${student.eng}</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>Geo:</span> <span>${student.geo}</span></div>
-                    <div style="display:flex; justify-content:space-between;"><span>His:</span> <span>${student.his}</span></div>
-                </div>
-
-                <div style="margin-top: 15px; background: #e6fffa; padding: 10px; border-radius: 6px; font-size: 14px;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>WADARTA GUUD (Total):</span> ${student.total}</div>
-                    <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>Celcelis (Avg):</span> ${student.avg}%</div>
-                    <div style="display:flex; justify-content:space-between; margin-bottom:3px;"><span>Darajo (Grade):</span> ${student.grade}</div>
-                    <div style="display:flex; justify-content:space-between; font-weight:bold; color:#234e52;"><span>Xaaladda (Status):</span> ${student.status}</div>
-                </div>
-
-                <div style="margin-top: 12px; font-size: 12px; text-align: center; color: #718096; font-style: italic;">Maamulaha Imtixaanaadka heer degmo: ${student.admin}</div>
-            `;
+                resultDiv.classList.add("error");
+                resultDiv.innerHTML = "Username ama Password khaldan! Fadlan hubi aqoonsigaaga.";
+            }
+        } else {
+            resultDiv.style.display = "block";
+            resultDiv.classList.add("error");
+            resultDiv.innerHTML = "Roll No. maba jiro! Fadlan iska hubi.";
         }
-    } else {
-        resultDiv.style.display = "block";
-        resultDiv.classList.add("error");
-        resultDiv.innerHTML = "Ma jiro arday leh Roll No-gaan. Fadlan hubi.";
     }
-}
 </script>
 
 </body>
