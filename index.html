@@ -1,366 +1,79 @@
 <!DOCTYPE html>
 <html lang="so">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIILE EXAMINATION BOARD (BEB)</title>
+    <meta charset="UTF-8"><title>BEB SYSTEM</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 550px;
-        }
-        .logo {
-            width: 120px;
-            height: auto;
-            margin-bottom: 15px;
-        }
-        h2 {
-            color: #1a365d;
-            margin-bottom: 5px;
-            font-size: 22px;
-        }
-        h3 {
-            color: #4a5568;
-            margin-bottom: 25px;
-            font-size: 16px;
-            font-weight: 500;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 7px;
-            color: #4a5568;
-            font-weight: 600;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
-            font-size: 16px;
-            outline: none;
-        }
-        input:focus {
-            border-color: #1a365d;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #1a365d;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #2b6cb0;
-        }
-        .result-box {
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 6px;
-            display: none;
-            text-align: left;
-        }
-        .error {
-            background-color: #fed7d7;
-            color: #9b2c2c;
-            border-left: 5px solid #e53e3e;
-            font-weight: bold;
-            text-align: center;
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-        .success {
-            background-color: #f7fafc;
-            color: #2d3748;
-            border: 1px solid #e2e8f0;
-            border-top: 4px solid #1a365d;
-        }
-        .result-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #1a365d;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 5px;
-            text-align: center;
-        }
-        #step1, #step2 {
-            display: none;
-        }
-        #step1 {
-            display: block;
-        }
+        body { font-family: sans-serif; background: #f4f6f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        input, button { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { background: #1a365d; color: white; font-weight: bold; cursor: pointer; border: none; }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 5px; text-align: left; display: none; }
+        .error { background: #fed7d7; color: #9b2c2c; }
+        .success { background: #f7fafc; border-top: 4px solid #1a365d; }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <img src="Logo.jpeg" alt="BEB Logo" class="logo">
-    
-    <h2>BIILE EXAMINATION BOARD</h2>
-    <h3>(BEB)</h3>    Academic year 2025-2026 
+    <h2>BIILE EXAMINATION BOARD (BEB)</h2>
+    <div id="error" class="result-box error"></div>
 
-    <div id="error-message" class="result-box error"></div>
-
-    <!-- BOGGA 1aad: LOGIN -->
+    <!-- LOGIN -->
     <div id="step1">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Geli Username-kaaga"      اسم الاستخدام >
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" placeholder="Geli Password-kaaga         كلمة المرور">
-        </div>
-
-        <button onclick="goToStep2()">مLOGIN       ادخل </button>
+        <div class="form-group"><label>Username:</label><input type="text" id="user"></div>
+        <div class="form-group"><label>Password:</label><input type="password" id="pass"></div>
+        <button onclick="login()">LOGIN</button>
     </div>
 
-    <!-- BOGGA 2aad: NATIIJO RAADIN -->
-    <div id="step2">
-        <div class="form-group">
-            <label for="studentId">Geli Roll No kaaga:     ادخل رقم جلوسك </label>
-            <input type="text" id="studentId" placeholder="Tusaale: YK260010...">
-        </div>
-
-        <button onclick="checkResult()">Hel Natiijadaada ابحث النتيجه </button>
+    <!-- RAADIN -->
+    <div id="step2" style="display:none;">
+        <div class="form-group"><label>Geli Roll No:</label><input type="text" id="roll"></div>
+        <button onclick="showResult()">Hel Natiijada</button>
     </div>
 
-    <div id="result" class="result-box"></div>
+    <div id="result" class="result-box success"></div>
 </div>
 
 <script>
-    // Kaliya 29da arday ee ugu horreysa ayaa halkan ku jira hadda
-    const studentsData = [
-  {
-    rollNo: "SM261000",
-    username: "fadumo1sm",
-    password: "sm0001",
-    school: "SULDAN MUBARAK",
-    class: "FORM 3",
-    name: "Fadumo Ibraahim Jaamac",
-    marks: { islamic: 85, arabic: 81, bio: 70, chem: 56, phy: 73, math: 90, eng: 79, bs: 70, ict: 100, som: 100 },
-    total: 804,
-    avg: 80.4,
-    grade: "B+",
-    hasDept: true
-  },
-  {
-    rollNo: "SM261001",
-    username: "sidiiq2",
-    password: "sm0002",
-    school: "SULDAN MUBARAK",
-    class: "FORM 3",
-    name: "Siddiiq Xuseen Axmed",
-    marks: { islamic: 80, arabic: 76, bio: 80, chem: 78, phy: 76, math: 70, eng: 71, bs: 61, ict: 88, som: 98 },
-    total: 778,
-    avg: 77.8,
-    grade: "B",
-    hasDept: false
-  },
-  {
-    rollNo: "SM261002",
-    username: "c/laahi3",
-    password: "sm0003",
-    school: "SULDAN MUBARAK",
-    class: "FORM 3",
-    name: "C/laahi Khaalid Khaliil",
-    marks: { islamic: 85, arabic: 70, bio: 61, chem: 54, phy: 71, math: 85, eng: 81, bs: 74, ict: 100, som: 90 },
-    total: 771,
-    avg: 77.1,
-    grade: "B",
-    hasDept: false
-  },
-  {
-    rollNo: "SM261003",
-    username: "asiyo4",
-    password: "sm0004",
-    school: "SULDAN MUBARAK",
-    class: "FORM 3",
-    name: "Asiyo Siciid Yaasiin",
-    marks: { islamic: 80, arabic: 80, bio: 45, chem: 55, phy: 65, math: 60, eng: 85, bs: 66, ict: 92, som: 98 },
-    total: 726,
-    avg: 72.6,
-    grade: "B-",
-    hasDept: true
-  },
-  {
-    rollNo: "SM261004",
-    username: "maxamuud5",
-    password: "sm0005",
-    school: "SULDAN MUBARAK",
-    class: "FORM 3",
-    name: "Maxamuud Cabdi Caydiid",
-    marks: { islamic: 85, arabic: 77, bio: 20, chem: 18, phy: 50, math: 98, eng: 83, bs: 62, ict: 70, som: 94 },
-    total: 657,
-    avg: 65.7,
-    grade: "C+",
-    hasDept: true
-  },
-  {
-    rollNo: "SM261005",
-    username: "c/laahi6",
-    password: "sm0006",
-    school: "SULDAN MUBARAK",
-    class: "FORM 3",
-    name: "C/laahi Cabdi Caydiid",
-    marks: { islamic: 60, arabic: 76, bio: 23, chem: 21, phy: 46, math: 52, eng: 77, bs: 73, ict: 76, som: 96 },
-    total: 600,
-    avg: 60,
-    grade: "C",
-    hasDept: true
-  }
-];
+    const students = [
+        { r: "SM261000", u: "fadumo1sm", p: "sm0001", n: "Fadumo Ibraahim", m: {ISL:85, ARB:81, BIO:70, CHM:56, PHY:73, MTH:90, ENG:79, ICT:100, SOM:100}, t: 804, a: 80.4, g: "B+" },
+        { r: "SM261001", u: "sidiiq2", p: "sm0002", n: "Siddiiq Xuseen", m: {ISL:80, ARB:76, BIO:80, CHM:78, PHY:76, MTH:70, ENG:71, ICT:88, SOM:98}, t: 778, a: 77.8, g: "B" },
+        { r: "YK26001020", u: "c/shakur7", p: "YK0007", n: "C/shakur C/khalif", m: {ISL:91, ARB:92, PHY:78, MTH:60, SOM:86, BIO:72, CHM:87, ICT:100, ENG:95}, t: 938, a: 85.2, g: "A-" },
+        { r: "YK26001001", u: "asiyo8", p: "YK0008", n: "Asiyo Maxamed", m: {ISL:100, ARB:100, PHY:86, MTH:70, SOM:100, BIO:70, CHM:55, ICT:80, ENG:83}, t: 933, a: 84.8, g: "B+" }
+    ];
 
-    "YK26001020": { username: "c/shakur7", password: "YK0007", name: "C/SHAKUR C/KHALIF MAXU'D", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 78, math: 60, som: 86, bio: 72, chem: 87, ict: 100, eng: 95, geo: 97, his: 80, total: 938, avg: "85.27", grade: "A-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001001": { username: "asiyo8", password: "YK0008", name: "ASIYO MAXAMED BARRE", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 86, math: 70, som: 100, bio: 70, chem: 55, ict: 80, eng: 83, geo: 93, his: 96, total: 933, avg: "84.82", grade: "B+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001019": { username: "maxamed", password: "YK0009", name: "MAXAMED C/QANI CALI", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 66, math: 50, som: 92, bio: 64, chem: 74, ict: 100, eng: 95, geo: 80, his: 74, total: 878, avg: "79.82", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001004": { username: "asma10", password: "YK0010", name: "ASMAA SICIID MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 51, arabi: 91, phy: 65, math: 60, som: 100, bio: 54, chem: 70, ict: 100, eng: 93, geo: 88, his: 96, total: 868, avg: "78.91", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001005": { username: "c/malik11", password: "YK0011", name: "C/MALIK CISMAN C/LAHI", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 61, math: 51, som: 96, bio: 76, chem: 60, ict: 80, eng: 75, geo: 70, his: 95, total: 864, avg: "78.55", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001009": { username: "asma12", password: "YK0012", name: "ASMAA YAASIIN AXMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 62, arabi: 50, phy: 60, math: 50, som: 91, bio: 75, chem: 88, ict: 94, eng: 83, geo: 92, his: 97, total: 842, avg: "76.55", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001017": { username: "ayuub13", password: "YK0013", name: "AYUUB C/CASIIS XASAN", school: "YAKA HIGH SCHOOL", class: "FORM2", islam: 87, arabi: 96, phy: 45, math: 56, som: 77, bio: 46, chem: 75, ict: 77, eng: 93, geo: 92, his: 80, total: 824, avg: "74.91", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001011": { username: "maxamud14", password: "YK0014", name: "MAXAMUD SICIID ABSHIR", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 79, arabi: 86, phy: 51, math: 59, som: 100, bio: 58, chem: 55, ict: 80, eng: 83, geo: 88, his: 79, total: 818, avg: "74.36", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001007": { username: "xafsa15", password: "YK0015", name: "XAFSO XASAN CISMAAN", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 92, arabi: 61, phy: 64, math: 52, som: 91, bio: 51, chem: 66, ict: 80, eng: 85, geo: 74, his: 91, total: 807, avg: "73.36", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001029": { username: "maxamed15", password: "YK0016", name: "MAXAMED XUSEEN C/QADIR", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 69, arabi: 68, phy: 76, math: 62, som: 86, bio: 61, chem: 31, ict: 90, eng: 89, geo: 92, his: 77, total: 801, avg: "72.82", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001010": { username: "muxiidiin17", password: "YK0017", name: "MUXIIDIIN AXMED MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 69, arabi: 52, phy: 72, math: 60, som: 88, bio: 67, chem: 62, ict: 93, eng: 75, geo: 73, his: 88, total: 799, avg: "72.64", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001018": { username: "fadumo18", password: "YK0018", name: "FADUMO CISMAN C/LAHI", school: "YAKA HIGH SCHOOL", class: "FORM2", islam: 91, arabi: 89, phy: 50, math: 65, som: 98, bio: 72, chem: 50, ict: 70, eng: 73, geo: 70, his: 70, total: 798, avg: "72.55", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001014": { username: "mukhtar19", password: "YK0019", name: "MUKHTAR AXMED MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM2", islam: 95, arabi: 91, phy: 53, math: 52, som: 67, bio: 52, chem: 40, ict: 77, eng: 93, geo: 95, his: 77, total: 792, avg: "72", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001013": { username: "maxamed20", password: "YK0020", name: "MAXAMED C/MALIK KHALIIF", school: "YAKA HIGH SCHOOL", class: "FORM2", islam: 92, arabi: 88, phy: 45, math: 45, som: 79, bio: 65, chem: 50, ict: 70, eng: 93, geo: 71, his: 88, total: 786, avg: "71.45", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001028": { username: "c/waasac21", password: "YK0021", name: "C/WAASAC C/RASAQ AXMED", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 61, arabi: 90, phy: 56, math: 66, som: 82, bio: 57, chem: 25, ict: 92, eng: 94, geo: 90, his: 70, total: 783, avg: "71.18", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001033": { username: "sakariye22", password: "YK0022", name: "SAKARIYE JAAMAC CABDI", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 70, arabi: 86, phy: 52, math: 50, som: 78, bio: 54, chem: 20, ict: 96, eng: 94, geo: 88, his: 84, total: 772, avg: "70.18", grade: "B-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001008": { username: "maxamud23", password: "YK0023", name: "MAXAMUD CISMAN CAJAB", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 80, arabi: 50, phy: 50, math: 40, som: 76, bio: 65, chem: 72, ict: 95, eng: 65, geo: 78, his: 97, total: 768, avg: "69.82", grade: "C+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001027": { username: "sakariye24", password: "YK0024", name: "SAKARIYE MAXAMED BARRE", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 51, arabi: 81, phy: 67, math: 52, som: 88, bio: 60, chem: 35, ict: 78, eng: 87, geo: 89, his: 76, total: 764, avg: "69.45", grade: "C+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001023": { username: "maxamed25", password: "YK0025", name: "MAXAMED C/RISAAQ KHALIIF", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 59, arabi: 77, phy: 56, math: 56, som: 64, bio: 66, chem: 30, ict: 92, eng: 95, geo: 88, his: 80, total: 763, avg: "69.36", grade: "C+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-    "YK26001012": { username: "maxamed26", password: "YK0026", name: "MAXAMED MAXAMUD CABDI", school: "YAKA HIGH SCHOOL", class: "FORM2", islam: 67, arabi: 60, phy: 52, math: 52, som: 89, bio: 71, chem: 66, ict: 73, eng: 89, geo: 70, his: 63, total: 752, avg: "68.36", grade: "C+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-    "YK26001025": { username: "maxamuud27", password: "YK0027", name: "MAXAMUD MAXE'D CUMAR", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 50, arabi: 94, phy: 49, math: 62, som: 90, bio: 53, chem: 40, ict: 84, eng: 89, geo: 61, his: 73, total: 745, avg: "67.73", grade: "C+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001015": { username: "c/laahi28", password: "YK0028", name: "C/LAAHI MAXAMED C/LAHI", school: "YAKA HIGH SCHOOL", class: "FORM2", islam: 50, arabi: 79, phy: 50, math: 46, som: 81, bio: 71, chem: 36, ict: 70, eng: 97, geo: 67, his: 66, total: 713, avg: "64.82", grade: "C", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001022": { username: "usaame29", password: "YK0029", name: "USAME SICIID CABDI", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 50, arabi: 94, phy: 70, math: 50, som: 78, bio: 53, chem: 10, ict: 88, eng: 83, geo: 65, his: 66, total: 707, avg: "64.27", grade: "C", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true }
-    };           
+    let currentUser = null;
+    const $ = id => document.getElementById(id);
 
-
-    let authenticatedStudent = null;
-
-    function goToStep2() {
-        const usernameInput = document.getElementById("username").value.trim();
-        const passwordInput = document.getElementById("password").value.trim();
-        const errorDiv = document.getElementById("error-message");
-
-        errorDiv.style.display = "none";
-        errorDiv.innerHTML = "";
-
-        if (usernameInput === "" || passwordInput === "") {
-            errorDiv.style.display = "block";
-            errorDiv.innerHTML = "Fadlan buuxi Username iyo Password.";
-            return;
-        }
-
-        let found = false;
-        for (let rollNo in studentsData) {
-            if (studentsData[rollNo].username === usernameInput && studentsData[rollNo].password === passwordInput) {
-                authenticatedStudent = studentsData[rollNo];
-                authenticatedStudent.rollNo = rollNo;
-                found = true;
-                break;
-            }
-        }
-
-        if (found) {
-            document.getElementById("step1").style.display = "none";
-            document.getElementById("step2").style.display = "block";
+    function login() {
+        currentUser = students.find(s => s.u === $('user').value.trim() && s.p === $('pass').value.trim());
+        if (currentUser) {
+            $('step1').style.display = 'none';
+            $('step2').style.display = 'block';
+            $('error').style.display = 'none';
         } else {
-            errorDiv.style.display = "block";
-            errorDiv.innerHTML = "Username ama Password khaldan!";
+            $('error').innerText = "Username ama Password waa khalad!";
+            $('error').style.display = 'block';
         }
     }
 
-    function checkResult() {
-        const idInput = document.getElementById("studentId").value.trim().toUpperCase();
-        const resultDiv = document.getElementById("result");
-        const errorDiv = document.getElementById("error-message");
-        
-        resultDiv.style.display = "none";
-        resultDiv.className = "result-box";
-        resultDiv.innerHTML = "";
-        errorDiv.style.display = "none";
+    function showResult() {
+        $('error').style.display = 'none';
+        $('result').style.display = 'none';
 
-        if (idInput === "") {
-            errorDiv.style.display = "block";
-            errorDiv.innerHTML = "Fadlan geli Roll No.";
+        if ($('roll').value.trim().toUpperCase() !== currentUser.r.toUpperCase()) {
+            $('error').innerText = "Roll No kulama jaanqaadayo koontadaada!";
+            $('error').style.display = 'block';
             return;
         }
 
-        if (idInput === authenticatedStudent.rollNo) {
-            if (authenticatedStudent.hasDebt) {
-                resultDiv.style.display = "block";
-                resultDiv.classList.add("error");
-                resultDiv.innerHTML = "FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.";
-            } else {
-                resultDiv.style.display = "block";
-                resultDiv.classList.add("success");
-                resultDiv.innerHTML = `
-                    <div class="result-title">NATIIJADA ARDAYGA</div>
-                    
-                    <div style="background: #edf2f7; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
-                        <strong>Magaca:</strong> ${authenticatedStudent.name}<br>
-                        <strong>Iskuulka:</strong> ${authenticatedStudent.school}<br>
-                        <strong>Fasalka:</strong> ${authenticatedStudent.class}<br>
-                        <strong>Celcelis (Avg):</strong> ${authenticatedStudent.avg}% | <strong>Grade:</strong> ${authenticatedStudent.grade}<br>
-                        <strong>Status:</strong> <span style="color: green; font-weight: bold;">${authenticatedStudent.status}</span>
-                    </div>
-                    
-                    <div style="font-size: 14px; line-height: 1.6;">
-                        • Islam: ${authenticatedStudent.islam}<br>
-                        • Arabi: ${authenticatedStudent.arabi}<br>
-                        • Physics: ${authenticatedStudent.phy}<br>
-                        • Maths: ${authenticatedStudent.math}<br>
-                        • Somali: ${authenticatedStudent.som}<br>
-                        • Biology: ${authenticatedStudent.bio}<br>
-                        • Chemistry: ${authenticatedStudent.chem}<br>
-                        • ICT: ${authenticatedStudent.ict}<br>
-                        • English: ${authenticatedStudent.eng}<br>
-                        • Geography: ${authenticatedStudent.geo}<br>
-                        • History: ${authenticatedStudent.his}<br>
-                        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #cbd5e0;">
-                        <strong>Total Score:</strong> ${authenticatedStudent.total}<br>
-                        <strong>Maamulaha:</strong> ${authenticatedStudent.admin}
-                    </div>
-                `;
-            }
-        } else {
-            errorDiv.style.display = "block";
-            errorDiv.innerHTML = "Roll No-gaan kuma jiro akoonkaaga! Fadlan geli Roll No-gaaga saxda ah.";
-        }
+        let mHtml = `<h3>Natiijada: ${currentUser.n}</h3><p>Roll No: ${currentUser.r}</p><hr>`;
+        for (let [sub, mark] of Object.entries(currentUser.m)) mHtml += `<p><strong>${sub}:</strong> ${mark}</p>`;
+        
+        mHtml += `<hr><p><strong>Total:</strong> ${currentUser.t}</p><p><strong>Avg:</strong> ${currentUser.a}%</p><p><strong>Grade:</strong> ${currentUser.g}</p>`;
+        $('result').innerHTML = mHtml;
+        $('result').style.display = 'block';
     }
 </script>
-
 </body>
 </html>
