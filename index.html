@@ -3,76 +3,125 @@
 <head>
     <meta charset="UTF-8"><title>BEB SYSTEM</title>
     <style>
-        body { font-family: sans-serif; background: #f4f6f9; display: flex; justify-content: center; padding: 20px; }
-        .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; }
         .form-group { margin-bottom: 15px; text-align: left; }
-        input, button { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-        button { background: #1a365d; color: white; font-weight: bold; cursor: pointer; border: none; }
-        .result-box { margin-top: 20px; padding: 15px; border-radius: 5px; text-align: left; display: none; }
-        .error { background: #fed7d7; color: #9b2c2c; }
-        .success { background: #f7fafc; border-top: 4px solid #1a365d; }
+        input, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 15px; }
+        button { background: #2e7d32; color: white; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; }
+        button:hover { background: #1b5e20; }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; }
+        .error { background: #fed7d7; color: #9b2c2c; border: 1px solid #e53e3e; text-align: left; }
+        
+        /* Xogta Caadiga ah ee Ardayga */
+        .student-info-card { text-align: left; background: #fafafa; padding: 15px; border-radius: 6px; border-left: 5px solid #2e7d32; margin-top: 20px; font-size: 15px; line-height: 1.6; }
+        .student-info-card h3 { color: #1b5e20; margin-bottom: 8px; font-size: 18px; }
+        
+        /* Shaxda Jadwalka Cagaarka iyo Caddanka */
+        .student-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; text-align: left; }
+        .student-table th { background-color: #2e7d32; color: white; padding: 10px; font-size: 14px; }
+        .student-table td { padding: 10px; border: 1px solid #e0e0e0; color: #333; font-size: 14px; }
+        .student-table tr:nth-child(even) { background-color: #f1f8e9; } /* Safarka dhexda ah oo cagaar khafif ah */
+        .section-title { background: #e8f5e9; color: #1b5e20; font-weight: bold; text-align: center; padding: 8px; border: 1px solid #c8e6c9; margin-top: 20px; border-radius: 4px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>BIILE EXAMINATION BOARD (BEB)</h2>
+    <h2 style="color: #2e7d32; margin-left: 20px;">BIILE EXAMINATION BOARD (BEB)</h2>
     <div id="error" class="result-box error"></div>
 
-    <!-- LOGIN -->
+    <!-- BOGGA LOGIN-KA -->
     <div id="step1">
-        <div class="form-group"><label>Username:</label><input type="text" id="user"></div>
-        <div class="form-group"><label>Password:</label><input type="password" id="pass"></div>
-        <button onclick="login()">LOGIN</button>
+        <div class="form-group"><label>Username:</label><input type="text" id="user" placeholder="Geli Username"></div>
+        <div class="form-group"><label>Password:</label><input type="password" id="pass" placeholder="Geli Password"></div>
+        <button type="button" onclick="login()">SOO GAL (LOGIN)</button>
     </div>
 
-    <!-- RAADIN -->
+    <!-- BOGGA RAADINTA NATIIJADA -->
     <div id="step2" style="display:none;">
-        <div class="form-group"><label>Geli Roll No:</label><input type="text" id="roll"></div>
-        <button onclick="showResult()">Hel Natiijada</button>
+        <div class="form-group"><label>Geli Roll No-gaaga:</label><input type="text" id="roll" placeholder="Tusaale: SM261000"></div>
+        <button type="button" onclick="showResult()">HEL NATIIJADA</button>
     </div>
 
-    <div id="result" class="result-box success"></div>
+    <!-- HALKAN WAXAA KA SOO BAXAYA XOGTA IYO JADWALKA -->
+    <div id="result"></div>
 </div>
 
 <script>
     const students = [
-        { r: "SM261000", u: "fadumo1sm", p: "sm0001", n: "Fadumo Ibraahim", m: {ISL:85, ARB:81, BIO:70, CHM:56, PHY:73, MTH:90, ENG:79, ICT:100, SOM:100}, t: 804, a: 80.4, g: "B+" },
-        { r: "SM261001", u: "sidiiq2", p: "sm0002", n: "Siddiiq Xuseen", m: {ISL:80, ARB:76, BIO:80, CHM:78, PHY:76, MTH:70, ENG:71, ICT:88, SOM:98}, t: 778, a: 77.8, g: "B" },
-        { r: "YK26001020", u: "c/shakur7", p: "YK0007", n: "C/shakur C/khalif", m: {ISL:91, ARB:92, PHY:78, MTH:60, SOM:86, BIO:72, CHM:87, ICT:100, ENG:95}, t: 938, a: 85.2, g: "A-" },
-        { r: "YK26001001", u: "asiyo8", p: "YK0008", n: "Asiyo Maxamed", m: {ISL:100, ARB:100, PHY:86, MTH:70, SOM:100, BIO:70, CHM:55, ICT:80, ENG:83}, t: 933, a: 84.8, g: "B+" }
+        { r: "SM261000", u: "fadumo1sm", p: "sm0001", s: "SULDAN MUBARAK", c: "FORM 3", n: "Fadumo Ibraahim Jaamac", m: {ISLAMIC:85, ARABIC:81, BIO:70, CHEM:56, PHY:73, MATH:90, ENG:79, ICT:100, SOMALI:100}, t: 804, a: 80.4, g: "B+" },
+        { r: "SM261001", u: "sidiiq2", p: "sm0002", s: "SULDAN MUBARAK", c: "FORM 3", n: "Siddiiq Xuseen Axmed", m: {ISLAMIC:80, ARB:76, BIO:80, CHEM:78, PHY:76, MATH:70, ENG:71, ICT:88, SOMALI:98}, t: 778, a: 77.8, g: "B" },
+        { r: "YK26001020", u: "c/shakur7", p: "YK0007", s: "YAKA HIGH SCHOOL", c: "FORM 1", n: "C/shakur C/khalif Maxu'd", m: {ISLAMIC:91, ARABIC:92, PHY:78, MATH:60, SOMALI:86, BIO:72, CHEM:87, ICT:100, ENG:95}, t: 938, a: 85.2, g: "A-" },
+        { r: "YK26001001", u: "asiyo8", p: "YK0008", s: "YAKA HIGH SCHOOL", c: "FORM 3", n: "Asiyo Maxamed Barre", m: {ISLAMIC:100, ARABIC:100, PHY:86, MATH:70, SOMALI:100, BIO:70, CHEM:55, ICT:80, ENG:83}, t: 933, a: 84.8, g: "B+" }
     ];
 
     let currentUser = null;
-    const $ = id => document.getElementById(id);
 
     function login() {
-        currentUser = students.find(s => s.u === $('user').value.trim() && s.p === $('pass').value.trim());
+        const uInp = document.getElementById('user').value.trim();
+        const pInp = document.getElementById('pass').value.trim();
+        const err = document.getElementById('error');
+
+        currentUser = students.find(s => s.u === uInp && s.p === pInp);
+        
         if (currentUser) {
-            $('step1').style.display = 'none';
-            $('step2').style.display = 'block';
-            $('error').style.display = 'none';
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            err.style.display = 'none';
         } else {
-            $('error').innerText = "Username ama Password waa khalad!";
-            $('error').style.display = 'block';
+            err.innerText = "Username ama Password waa khalad!";
+            err.style.display = 'block';
         }
     }
 
     function showResult() {
-        $('error').style.display = 'none';
-        $('result').style.display = 'none';
+        const rInp = document.getElementById('roll').value.trim().toUpperCase();
+        const err = document.getElementById('error');
+        const res = document.getElementById('result');
 
-        if ($('roll').value.trim().toUpperCase() !== currentUser.r.toUpperCase()) {
-            $('error').innerText = "Roll No kulama jaanqaadayo koontadaada!";
-            $('error').style.display = 'block';
+        err.style.display = 'none';
+        res.innerHTML = '';
+
+        if (rInp !== currentUser.r.toUpperCase()) {
+            err.innerText = "Roll No kulama jaanqaadayo koontadaada!";
+            err.style.display = 'block';
             return;
         }
 
-        let mHtml = `<h3>Natiijada: ${currentUser.n}</h3><p>Roll No: ${currentUser.r}</p><hr>`;
-        for (let [sub, mark] of Object.entries(currentUser.m)) mHtml += `<p><strong>${sub}:</strong> ${mark}</p>`;
+        // Qaybta 1aad: Xogta gaarka ah ee ardayga (Qoraal Caadi ah)
+        let htmlContent = `
+            <div class="student-info-card">
+                <h3>${currentUser.n}</h3>
+                <div><strong>Roll Number:</strong> ${currentUser.r}</div>
+                <div><strong>Iskuulka:</strong> ${currentUser.s}</div>
+                <div><strong>Fasalka:</strong> ${currentUser.c}</div>
+            </div>
+
+            <div class="section-title">NATIIJADA MAADOOYINKA</div>
+            <table class="student-table">
+                <thead>
+                    <tr><th>Maadada</th><th>Dhibcaha</th></tr>
+                </thead>
+                <tbody>`;
+
+        // Qaybta 2aad: Jadwalka Maadooyinka
+        for (let [subject, mark] of Object.entries(currentUser.m)) {
+            htmlContent += `<tr><td><strong>${subject}</strong></td><td>${mark}</td></tr>`;
+        }
         
-        mHtml += `<hr><p><strong>Total:</strong> ${currentUser.t}</p><p><strong>Avg:</strong> ${currentUser.a}%</p><p><strong>Grade:</strong> ${currentUser.g}</p>`;
-        $('result').innerHTML = mHtml;
-        $('result').style.display = 'block';
+        // Qaybta 3aad: Jadwalka Natiijada Guud
+        htmlContent += `
+                </tbody>
+            </table>
+
+            <div class="section-title">NATIIJADA GUUD</div>
+            <table class="student-table">
+                <tr><td><strong>Total Marks:</strong></td><td><strong>${currentUser.t}</strong></td></tr>
+                <tr><td><strong>Average (Celcelis):</strong></td><td><strong>${currentUser.a}%</strong></td></tr>
+                <tr><td><strong>Grade:</strong></td><td style="color: #2e7d32; font-weight: bold;"><strong>${currentUser.g}</strong></td></tr>
+            </table>`;
+
+        res.innerHTML = htmlContent;
+        res.style.display = 'block';
     }
 </script>
 </body>
