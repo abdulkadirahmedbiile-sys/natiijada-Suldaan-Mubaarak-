@@ -160,13 +160,87 @@
 
 <script>
     // Kaliya 29da arday ee ugu horreysa ayaa halkan ku jira hadda
-    const studentsData = {
-    "YK26001000": { username: "ayaan1", password: "YK0001", name: "AYAAN CABDI AXMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 92, math: 81, som: 100, bio: 95, chem: 100, ict: 96, eng: 97, geo: 98, his: 100, total: 1059, avg: "96.27", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-    "YK26001030": { username: "fadumo2", password: "YK0002", name: "FADUMO XISRSI MAXAMUD", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 100, arabi: 96, phy: 100, math: 94, som: 96, bio: 90, chem: 95, ict: 100, eng: 90, geo: 99, his: 93, total: 1053, avg: "95.73", grade: "A+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: false },
-    "YK26001002": { username: "amino3", password: "YK0003", name: "AMINO CUMAR C/LAHI", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 92, arabi: 96, phy: 68, math: 60, som: 100, bio: 70, chem: 90, ict: 93, eng: 95, geo: 92, his: 93, total: 949, avg: "86.27", grade: "A-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001031": { username: "xubbi4", password: "YK0004", name: "XUBBI AXMED JAAMAC", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 95, arabi: 90, phy: 89, math: 70, som: 88, bio: 80, chem: 70, ict: 96, eng: 86, geo: 93, his: 90, total: 947, avg: "86.09", grade: "A-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001006": { username: "fawsiyo5", password: "YK0005", name: "FAWSIYO C/QADIR MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 89, arabi: 100, phy: 66, math: 56, som: 88, bio: 81, chem: 83, ict: 94, eng: 93, geo: 98, his: 96, total: 944, avg: "85.82", grade: "A-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
-    "YK26001003": { username: "deeqo6", password: "YK0006", name: "DEEQO C/RASHIID MAXAMED", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 89, arabi: 100, phy: 68, math: 60, som: 100, bio: 71, chem: 75, ict: 100, eng: 93, geo: 90, his: 96, total: 942, avg: "85.64", grade: "A-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
+    const studentsData = [
+  {
+    rollNo: "SM261000",
+    username: "fadumo1sm",
+    password: "sm0001",
+    school: "SULDAN MUBARAK",
+    class: "FORM 3",
+    name: "Fadumo Ibraahim Jaamac",
+    marks: { islamic: 85, arabic: 81, bio: 70, chem: 56, phy: 73, math: 90, eng: 79, bs: 70, ict: 100, som: 100 },
+    total: 804,
+    avg: 80.4,
+    grade: "B+",
+    hasDept: true
+  },
+  {
+    rollNo: "SM261001",
+    username: "sidiiq2",
+    password: "sm0002",
+    school: "SULDAN MUBARAK",
+    class: "FORM 3",
+    name: "Siddiiq Xuseen Axmed",
+    marks: { islamic: 80, arabic: 76, bio: 80, chem: 78, phy: 76, math: 70, eng: 71, bs: 61, ict: 88, som: 98 },
+    total: 778,
+    avg: 77.8,
+    grade: "B",
+    hasDept: false
+  },
+  {
+    rollNo: "SM261002",
+    username: "c/laahi3",
+    password: "sm0003",
+    school: "SULDAN MUBARAK",
+    class: "FORM 3",
+    name: "C/laahi Khaalid Khaliil",
+    marks: { islamic: 85, arabic: 70, bio: 61, chem: 54, phy: 71, math: 85, eng: 81, bs: 74, ict: 100, som: 90 },
+    total: 771,
+    avg: 77.1,
+    grade: "B",
+    hasDept: false
+  },
+  {
+    rollNo: "SM261003",
+    username: "asiyo4",
+    password: "sm0004",
+    school: "SULDAN MUBARAK",
+    class: "FORM 3",
+    name: "Asiyo Siciid Yaasiin",
+    marks: { islamic: 80, arabic: 80, bio: 45, chem: 55, phy: 65, math: 60, eng: 85, bs: 66, ict: 92, som: 98 },
+    total: 726,
+    avg: 72.6,
+    grade: "B-",
+    hasDept: true
+  },
+  {
+    rollNo: "SM261004",
+    username: "maxamuud5",
+    password: "sm0005",
+    school: "SULDAN MUBARAK",
+    class: "FORM 3",
+    name: "Maxamuud Cabdi Caydiid",
+    marks: { islamic: 85, arabic: 77, bio: 20, chem: 18, phy: 50, math: 98, eng: 83, bs: 62, ict: 70, som: 94 },
+    total: 657,
+    avg: 65.7,
+    grade: "C+",
+    hasDept: true
+  },
+  {
+    rollNo: "SM261005",
+    username: "c/laahi6",
+    password: "sm0006",
+    school: "SULDAN MUBARAK",
+    class: "FORM 3",
+    name: "C/laahi Cabdi Caydiid",
+    marks: { islamic: 60, arabic: 76, bio: 23, chem: 21, phy: 46, math: 52, eng: 77, bs: 73, ict: 76, som: 96 },
+    total: 600,
+    avg: 60,
+    grade: "C",
+    hasDept: true
+  }
+];
+
     "YK26001020": { username: "c/shakur7", password: "YK0007", name: "C/SHAKUR C/KHALIF MAXU'D", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 78, math: 60, som: 86, bio: 72, chem: 87, ict: 100, eng: 95, geo: 97, his: 80, total: 938, avg: "85.27", grade: "A-", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
     "YK26001001": { username: "asiyo8", password: "YK0008", name: "ASIYO MAXAMED BARRE", school: "YAKA HIGH SCHOOL", class: "FORM3", islam: 100, arabi: 100, phy: 86, math: 70, som: 100, bio: 70, chem: 55, ict: 80, eng: 83, geo: 93, his: 96, total: 933, avg: "84.82", grade: "B+", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
     "YK26001019": { username: "maxamed", password: "YK0009", name: "MAXAMED C/QANI CALI", school: "YAKA HIGH SCHOOL", class: "FORM1", islam: 91, arabi: 92, phy: 66, math: 50, som: 92, bio: 64, chem: 74, ict: 100, eng: 95, geo: 80, his: 74, total: 878, avg: "79.82", grade: "B", status: "PASS", admin: "ENG.AHMED BIILE", hasDebt: true },
