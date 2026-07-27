@@ -5,6 +5,7 @@
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; display: flex; justify-content: center; padding: 20px; }
         .container { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; }
+        .logo { width: 120px; height: auto; margin-bottom: 15px; }
         .form-group { margin-bottom: 15px; text-align: left; }
         input, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 15px; }
         button { background: #2e7d32; color: white; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; }
@@ -20,13 +21,18 @@
         .student-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; text-align: left; }
         .student-table th { background-color: #2e7d32; color: white; padding: 10px; font-size: 14px; }
         .student-table td { padding: 10px; border: 1px solid #e0e0e0; color: #333; font-size: 14px; }
-        .student-table tr:nth-child(even) { background-color: #f1f8e9; } /* Safarka dhexda ah oo cagaar khafif ah */
+        .student-table tr:nth-child(even) { background-color: #f1f8e9; } 
         .section-title { background: #e8f5e9; color: #1b5e20; font-weight: bold; text-align: center; padding: 8px; border: 1px solid #c8e6c9; margin-top: 20px; border-radius: 4px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2 style="color: #2e7d32; margin-left: 20px;">BIILE EXAMINATION BOARD (BEB)</h2>
+    <!-- LOGO-DII WAA TAN -->
+    <img src="Logo.jpeg" alt="BEB Logo" class="logo">
+
+    <h2 style="color: #2e7d32; margin-bottom: 5px;">BIILE EXAMINATION BOARD</h2>
+    <h3 style="color: #4a5568; margin-bottom: 20px; font-size: 16px; font-weight: 500;">(BEB)</h3>
+    
     <div id="error" class="result-box error"></div>
 
     <!-- BOGGA LOGIN-KA -->
@@ -87,7 +93,6 @@
             return;
         }
 
-        // Qaybta 1aad: Xogta gaarka ah ee ardayga (Qoraal Caadi ah)
         let htmlContent = `
             <div class="student-info-card">
                 <h3>${currentUser.n}</h3>
@@ -103,12 +108,10 @@
                 </thead>
                 <tbody>`;
 
-        // Qaybta 2aad: Jadwalka Maadooyinka
         for (let [subject, mark] of Object.entries(currentUser.m)) {
             htmlContent += `<tr><td><strong>${subject}</strong></td><td>${mark}</td></tr>`;
         }
         
-        // Qaybta 3aad: Jadwalka Natiijada Guud
         htmlContent += `
                 </tbody>
             </table>
