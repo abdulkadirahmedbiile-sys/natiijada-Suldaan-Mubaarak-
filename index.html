@@ -20,8 +20,9 @@
         th { background: var(--blue); color: var(--white); padding: 10px; border: 1px solid #dee2e6; }
         td { padding: 10px; border: 1px solid #dee2e6; }
         tr:nth-child(even) { background: #f8f9fa; }
-        .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #eef2f7; padding: 15px; border-radius: 8px; border-left: 5px solid var(--green); text-align: left; font-size: 15px; }
-        .alert { background: #f8d7da; color: var(--red); border: 2px dashed var(--red); padding: 20px; border-radius: 8px; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
+        .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #eef2f7; padding: 15px; border-radius: 8px; border-left: 5px solid var(--green); text-align: left; font-size: 15px; margin-bottom: 15px; }
+        .chairman { background: #fff; padding: 12px; border: 1px dashed var(--blue); border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; color: #1b3a4b; margin-top: 15px; }
+        .alert { background: #f8d7da; color: var(--red); border: 2px dashed var(--red); padding: 30px; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 20px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -29,7 +30,6 @@
 <div class="card">
     <!-- BOGGA 1AAD -->
     <div id="p1" class="page active">
-        <!-- Halkan magaca sawirkaaga si toos ah ayaa loogu dhex qoray (Logo.jpeg) -->
         <img src="Logo.jpeg" alt="BEB LOGO">
         <h1>BIILE EXAMINATION BOARD (BEB)</h1>
         <input type="text" id="roll" placeholder="Geli Roll Number-ka">
@@ -38,7 +38,8 @@
 
     <!-- BOGGA 2AAD -->
     <div id="p2" class="page">
-        <div class="result-header" id="info"></div>
+        <!-- Madaxan waxaa lagu dhex qori doonaa JS oo kaliya hadii lacagta la bixiyey -->
+        <div id="info"></div>
         <div id="content"></div>
         <button class="btn btn-back" onclick="back()">KU NOQO BOGGA HORE</button>
     </div>
@@ -59,15 +60,25 @@
         const st = db[val];
         if (!st) return alert("Roll Number-kaas lama helin!");
 
+        // U gudub Bogga 2aad
         document.getElementById("p1").classList.remove("active");
         document.getElementById("p2").classList.add("active");
-        document.getElementById("info").innerHTML = `<h2>Ardayga: ${st.name}</h2><p>Roll Number: ${val}</p>`;
         
+        const info = document.getElementById("info");
         const cont = document.getElementById("content");
+        
+        // Nadiifi meelihii hore
+        info.innerHTML = "";
+        cont.innerHTML = "";
+
+        // 1. HUBI JIRITAANKA LACAGTA (Haddii aanu bixin - Magac iyo Xog midna ma arkayo)
         if (!st.pay) {
             cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.</div>`;
             return;
         }
+
+        // 2. HADDII LACAGTA LA BIXIYEEY (Ardaygu wuxuu arkayaa xogtiisa oo dhan)
+        info.innerHTML = `<div class="result-header"><h2>Ardayga: ${st.name}</h2><p>Roll Number: ${val}</p></div>`;
 
         let html = `<table><tr><th>Maaddo</th><th>Dhibco</th><th>Maaddo</th><th>Dhibco</th></tr>`;
         let tot = 0;
@@ -81,10 +92,12 @@
         let gr = avg>=90?"A+":avg>=80?"A":avg>=70?"B":avg>=60?"C":avg>=50?"D":"F";
         let status = avg >= 50 ? "GUDBAY" : "HARAY";
         
-        cont.innerHTML = html + `</table><div class="summary">
+        cont.innerHTML = html + `</table>
+        <div class="summary">
             <div><strong>Total:</strong> ${tot}</div><div><strong>Average:</strong> ${avg}%</div>
             <div><strong>Grade:</strong> ${gr}</div><div><strong>Status:</strong> <span style="color:${avg>=50?'var(--green)':'var(--red)'};font-weight:bold">${status}</span></div>
-        </div>`;
+        </div>
+        <div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE</div>`;
     }
 
     function back() {
