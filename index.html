@@ -16,126 +16,72 @@
         .btn { width: 100%; padding: 12px; background: var(--blue); color: var(--white); border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
         .btn-back { background: #6c757d; margin-top: 15px; }
         .result-header { background: linear-gradient(135deg, var(--blue), var(--green)); color: var(--white); padding: 18px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
-        .result-header h2 { font-size: 18px; margin-bottom: 5px; }
-        .result-header p { font-size: 14px; opacity: 0.95; margin-bottom: 3px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: var(--white); text-align: left; }
-        th { background: var(--blue); color: var(--white); padding: 10px; border: 1px solid #dee2e6; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: var(--white); }
+        th { background: var(--blue); color: var(--white); padding: 10px; border: 1px solid #dee2e6; text-align: left; }
         td { padding: 10px; border: 1px solid #dee2e6; }
         tr:nth-child(even) { background: #f8f9fa; }
-        .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #eef2f7; padding: 15px; border-radius: 8px; border-left: 5px solid var(--green); text-align: left; font-size: 15px; margin-bottom: 15px; }
+        .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #eef2f7; padding: 15px; border-radius: 8px; border-left: 5px solid var(--green); text-align: left; font-size: 15px; }
         .chairman { background: #fff; padding: 12px; border: 1px dashed var(--blue); border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; color: #1b3a4b; margin-top: 15px; }
-        .alert { background: #f8d7da; color: var(--red); border: 2px dashed var(--red); padding: 30px; border-radius: 8px; font-weight: bold; font-size: 18px; margin-top: 20px; margin-bottom: 15px; }
+        .alert { background: #f8d7da; color: var(--red); border: 2px dashed var(--red); padding: 30px; border-radius: 8px; font-weight: bold; font-size: 18px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
-
 <div class="card">
-    <!-- BOGGA 1AAD -->
     <div id="p1" class="page active">
         <img src="Logo.jpeg" alt="BEB LOGO">
         <h1>BIILE EXAMINATION BOARD (BEB)</h1>
         <input type="text" id="roll" placeholder="Geli Roll Number-ka">
         <button class="btn" onclick="eeg()">HEL EEG NATIIJADA</button>
     </div>
-
-    <!-- BOGGA 2AAD -->
-    <div id="p2" class="page">
-        <div id="info"></div>
-        <div id="content"></div>
-        <button class="btn btn-back" onclick="back()">KU NOQO BOGGA HORE</button>
-    </div>
+    <div id="p2" class="page"><div id="info"></div><div id="content"></div><button class="btn btn-back" onclick="back()">KU NOQO BOGGA HORE</button></div>
 </div>
-
 <script>
-    // Xogta rasmiga ah ee 6-da arday ee laga soo minguuriyey dukumentigaaga
-       // Database-ka rasmiga ah ee 32-da Arday (Ku baddal koodhkii hore)
     const db = {
-        "SM261000": { name: "Faadumo Ibraahim Jaamac", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 804, avg: 80.4, grade: "B+", subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:81},{n:"BIO",s:70},{n:"CHEM",s:56},{n:"PHY",s:73},{n:"MATH",s:90},{n:"ENG",s:79},{n:"B/S",s:70},{n:"ICT",s:100},{n:"SOM",s:100}] },
-        "SM261001": { name: "Siddiiq Xuseen Axmed", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 778, avg: 77.8, grade: "B", subs: [{n:"ISLAMIC",s:80},{n:"ARABIC",s:76},{n:"BIO",s:80},{n:"CHEM",s:78},{n:"PHY",s:76},{n:"MATH",s:70},{n:"ENG",s:71},{n:"B/S",s:61},{n:"ICT",s:88},{n:"SOM",s:98}] },
-        "SM261002": { name: "C/laahi Khaalid Khaliil", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 771, avg: 77.1, grade: "B", subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:70},{n:"BIO",s:61},{n:"CHEM",s:54},{n:"PHY",s:71},{n:"MATH",s:85},{n:"ENG",s:81},{n:"B/S",s:74},{n:"ICT",s:100},{n:"SOM",s:90}] },
-        "SM261003": { name: "Asiyo Siciid Yaasiin", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 726, avg: 72.6, grade: "B-", subs: [{n:"ISLAMIC",s:80},{n:"ARABIC",s:80},{n:"BIO",s:45},{n:"CHEM",s:55},{n:"PHY",s:65},{n:"MATH",s:60},{n:"ENG",s:85},{n:"B/S",s:66},{n:"ICT",s:92},{n:"SOM",s:98}] },
-        "SM261004": { name: "Maxamuud Cabdi Caydiid", class: "FORM3", school: "SULDAN MUBARAK", pay: true, total: 657, avg: 65.7, grade: "C+", subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:77},{n:"BIO",s:20},{n:"CHEM",s:18},{n:"PHY",s:50},{n:"MATH",s:98},{n:"ENG",s:83},{n:"B/S",s:62},{n:"ICT",s:70},{n:"SOM",s:94}] },
-        "SM261005": { name: "C/laahi Cabdi Caydiid", class: "FORM3", school: "SULDAN MUBARAK", pay: true, total: 600, avg: 60.0, grade: "C", subs: [{n:"ISLAMIC",s:60},{n:"ARABIC",s:76},{n:"BIO",s:23},{n:"CHEM",s:21},{n:"PHY",s:46},{n:"MATH",s:52},{n:"ENG",s:77},{n:"B/S",s:73},{n:"ICT",s:76},{n:"SOM",s:96}] },
-        "SM261006": { name: "FAADUMO C/QAADIR MAXAMED", class: "FORM2", school: "SULDAN MUBARAK", pay: false, total: 1030, avg: 93.6, grade: "A", subs: [{n:"ISLAMIC",s:100},{n:"ARABIC",s:90},{n:"BIO",s:91},{n:"CHEM",s:85},{n:"PHY",s:95},{n:"MATH",s:100},{n:"ENG",s:79},{n:"B/S",s:97},{n:"ICT",s:99},{n:"SOM",s:94}] },
-        "SM261007": { name: "C/NAASIR KHAALID KHALIIL", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 1023, avg: 93.0, grade: "A", subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:86},{n:"BIO",s:89},{n:"CHEM",s:89},{n:"PHY",s:96},{n:"MATH",s:100},{n:"ENG",s:82},{n:"B/S",s:99},{n:"ICT",s:97},{n:"SOM",s:100}] },
-        "SM261008": { name: "CAISHO CABDI C/LAAHI", class: "FORM2", school: "SULDAN MUBARAK", pay: false, total: 980, avg: 89.1, grade: "A-", subs: [{n:"ISLAMIC",s:90},{n:"ARABIC",s:94},{n:"BIO",s:87},{n:"CHEM",s:90},{n:"PHY",s:96},{n:"MATH",s:100},{n:"ENG",s:69},{n:"B/S",s:79},{n:"ICT",s:75},{n:"SOM",s:100}] },
-        "SM261009": { name: "ANIISO MAWLIID FAARAH", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 976, avg: 88.7, grade: "A-", subs: [{n:"ISLAMIC",s:90},{n:"ARABIC",s:85},{n:"BIO",s:71},{n:"CHEM",s:84},{n:"PHY",s:99},{n:"MATH",s:98},{n:"ENG",s:63},{n:"B/S",s:89},{n:"ICT",s:97},{n:"SOM",s:100}] },
-        "SM261010": { name: "CAISHO FUAD CABDI", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 877, avg: 79.7, grade: "B", subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:85},{n:"BIO",s:60},{n:"CHEM",s:65},{n:"PHY",s:87},{n:"MATH",s:100},{n:"ENG",s:61},{n:"B/S",s:81},{n:"ICT",s:95},{n:"SOM",s:69}] },
-        "SM261011": { name: "ASMAA AXMED YASIIN", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 861, avg: 78.3, grade: "B", subs: [{n:"ISLAMIC",s:50},{n:"ARABIC",s:83},{n:"BIO",s:70},{n:"CHEM",s:84},{n:"PHY",s:87},{n:"MATH",s:88},{n:"ENG",s:57},{n:"B/S",s:87},{n:"ICT",s:79},{n:"SOM",s:83}] },
-        "SM261012": { name: "CAISHO C/QAADIR YASIIN", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 771, avg: 70.1, grade: "B-", subs: [{n:"ISLAMIC",s:90},{n:"ARABIC",s:85},{n:"BIO",s:58},{n:"CHEM",s:71},{n:"PHY",s:67},{n:"MATH",s:70},{n:"ENG",s:55},{n:"B/S",s:65},{n:"ICT",s:71},{n:"SOM",s:69}] },
-        "SM261013": { name: "BADRIYO CUMAR XAASHI", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 750, avg: 68.2, grade: "C+", subs: [{n:"ISLAMIC",s:75},{n:"ARABIC",s:85},{n:"BIO",s:60},{n:"CHEM",s:46},{n:"PHY",s:85},{n:"MATH",s:72},{n:"ENG",s:63},{n:"B/S",s:55},{n:"ICT",s:79},{n:"SOM",s:55}] },
-        "SM261014": { name: "NAFISO BAASHI AXMED", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 723, avg: 65.7, grade: "C+", subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:82},{n:"BIO",s:40},{n:"CHEM",s:50},{n:"PHY",s:71},{n:"MATH",s:82},{n:"ENG",s:45},{n:"B/S",s:65},{n:"ICT",s:79},{n:"SOM",s:47}] },
-        "SM261015": { name: "SICIID FAARAX MAXAMED", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 561, avg: 51.0, grade: "D+", subs: [{n:"ISLAMIC",s:35},{n:"ARABIC",s:78},{n:"BIO",s:30},{n:"CHEM",s:40},{n:"PHY",s:51},{n:"MATH",s:66},{n:"ENG",s:45},{n:"B/S",s:41},{n:"ICT",s:60},{n:"SOM",s:45}] },
-        "SM261016": { name: "MASCUUD C/LAHI MURSAL", class: "FORM1", school: "SULDAN MUBARAK", pay: true, total: 1071, avg: 97.4, grade: "A+", subs: [{n:"ISLAMIC",s:100},{n:"ARABIC",s:98},{n:"BIO",s:98},{n:"CHEM",s:92},{n:"PHY",s:100},{n:"MATH",s:100},{n:"ENG",s:90},{n:"B/S",s:94},{n:"ICT",s:99},{n:"SOM",s:100}] },
-        "SM261017": { name: "C/NASIR CALI XASHI", class: "FORM1", school: "SULDAN MUBARAK", pay: true, total: 1028, avg: 93.5, grade: "A", subs: [{n:"ISLAMIC",s:88},{n:"ARABIC",s:94},{n:"BIO",s:84},{n:"CHEM",s:92},{n:"PHY",s:100},{n:"MATH",s:98},{n:"ENG",s:79},{n:"B/S",s:94},{n:"ICT",s:99},{n:"SOM",s:100}] },
-        "SM261018": { name: "C/LAAHI C/QAADIR MAXAMED", class: "FORM1", school: "SULDAN MUBARAK", pay: true, total: 1023, avg: 93.0, grade: "A", subs: [{n:"ISLAMIC",s:100},{n:"ARABIC",s:93},{n:"BIO",s:80},{n:"CHEM",s:83},{n:"PHY",s:100},{n:"MATH",s:99},{n:"ENG",s:75},{n:"B/S",s:94},{n:"ICT",s:99},{n:"SOM",s:100}] },
-        "SM261019": { name: "HIBO MUSE JAAMAC", class: "FORM1", school: "SULDAN MUBARAK", pay: true, total: 839, avg: 76.3, grade: "B", subs: [{n:"ISLAMIC",s:64},{n:"ARABIC",s:84},{n:"BIO",s:77},{n:"CHEM",s:80},{n:"PHY",s:85},{n:"MATH",s:74},{n:"ENG",s:51},{n:"B/S",s:53},{n:"ICT",s:71},{n:"SOM",s:100}] },
-        "SM261020": { name: "BILAAL BAASHI AXMED", class: "FORM1", school: "SULDAN MUBARAK", pay: true, total: 805, avg: 73.2, grade: "B", subs: [{n:"ISLAMIC",s:56},{n:"ARABIC",s:82},{n:"BIO",s:51},{n:"CHEM",s:44},{n:"PHY",s:88},{n:"MATH",s:92},{n:"ENG",s:51},{n:"B/S",s:63},{n:"ICT",s:89},{n:"SOM",s:99}] },
-        "SM261021": { name: "CAAISHO FAARAX AXMED", class: "FORM1", school: "SULDAN MUBARAK", pay: true, total: 803, avg: 73.0, grade: "B-", subs: [{n:"ISLAMIC",s:68},{n:"ARABIC",s:82},{n:"BIO",s:84},{n:"CHEM",s:51},{n:"PHY",s:72},{n:"MATH",s:65},{n:"ENG",s:55},{n:"B/S",s:56},{n:"ICT",s:77},{n:"SOM",s:98}] },
-        "SM261022": { name: "MAA`IDO ALAALE C/LAAHI", class: "FORM2", school: "SULDAN MUBARAK", pay: true, total: 801, avg: 72.8, grade: "B-", subs: [{n:"ISLAMIC",s:64},{n:"ARABIC",s:91},{n:"BIO",s:70},{n:"CHEM",s:77},{n:"PHY",s:66},{n:"MATH",s:50},{n:"ENG",s:50},{n:"B/S",s:79},{n:"ICT",s:75},{n:"SOM",s:79}] },
-        "SM261023": { name: "DAARIQ BAASHI AXMED", class: "FORM3", school: "SULDAN MUBARAK", pay: true, total: 775, avg: 70.5, grade: "B-", subs: [{n:"ISLAMIC",s:40},{n:"ARABIC",s:70},{n:"BIO",s:51},{n:"CHEM",s:54},{n:"PHY",s:96},{n:"MATH",s:90},{n:"ENG",s:41},{n:"B/S",s:65},{n:"ICT",s:75},{n:"SOM",s:97}] },
-        "SM261024": { name: "BAXSAN MAXAMED CALI", class: "FORM4", school: "SULDAN MUBARAK", pay: true, total: 740, avg: 67.3, grade: "C+", subs: [{n:"ISLAMIC",s:68},{n:"ARABIC",s:86},{n:"BIO",s:42},{n:"CHEM",s:31},{n:"PHY",s:66},{n:"MATH",s:66},{n:"ENG",s:55},{n:"B/S",s:75},{n:"ICT",s:81},{n:"SOM",s:76}] },
-        "SM261025": { name: "C/MUDALIB CUMAR XASHI", class: "FORM5", school: "SULDAN MUBARAK", pay: true, total: 671, avg: 61.0, grade: "C", subs: [{n:"ISLAMIC",s:40},{n:"ARABIC",s:80},{n:"BIO",s:39},{n:"CHEM",s:45},{n:"PHY",s:80},{n:"MATH",s:50},{n:"ENG",s:31},{n:"B/S",s:60},{n:"ICT",s:79},{n:"SOM",s:77}] },
-        "SM261026": { name: "AYAAN FAHAD CABDI", class: "FORM6", school: "SULDAN MUBARAK", pay: true, total: 659, avg: 59.9, grade: "C-", subs: [{n:"ISLAMIC",s:32},{n:"ARABIC",s:70},{n:"BIO",s:29},{n:"CHEM",s:28},{n:"PHY",s:70},{n:"MATH",s:34},{n:"ENG",s:61},{n:"B/S",s:79},{n:"ICT",s:75},{n:"SOM",s:85}] },
-        "SM261027": { name: "XAAWO MAXAMED CABDI", class: "FORM7", school: "SULDAN MUBARAK", pay: true, total: 649, avg: 59.0, grade: "C-", subs: [{n:"ISLAMIC",s:44},{n:"ARABIC",s:65},{n:"BIO",s:40},{n:"CHEM",s:61},{n:"PHY",s:65},{n:"MATH",s:51},{n:"ENG",s:51},{n:"B/S",s:65},{n:"ICT",s:43},{n:"SOM",s:70}] },
-        "SM261028": { name: "IIMAAN FAHAD CABDI", class: "FORM8", school: "SULDAN MUBARAK", pay: true, total: 637, avg: 57.9, grade: "C-", subs: [{n:"ISLAMIC",s:48},{n:"ARABIC",s:81},{n:"BIO",s:33},{n:"CHEM",s:25},{n:"PHY",s:60},{n:"MATH",s:40},{n:"ENG",s:35},{n:"B/S",s:53},{n:"ICT",s:71},{n:"SOM",s:93}] },
-        "SM261029": { name: "MAXAMUUD MAXAMED C/LAAHI", class: "FORM9", school: "SULDAN MUBARAK", pay: true, total: 593, avg: 53.9, grade: "D+", subs: [{n:"ISLAMIC",s:50},{n:"ARABIC",s:79},{n:"BIO",s:33},{n:"CHEM",s:34},{n:"PHY",s:60},{n:"MATH",s:50},{n:"ENG",s:27},{n:"B/S",s:41},{n:"ICT",s:81},{n:"SOM",s:42}] },
-        "SM261030": { name: "SAACID FAARAX MAXAMED", class: "FORM10", school: "SULDAN MUBARAK", pay: true, total: 481, avg: 43.7, grade: "D", subs: [{n:"ISLAMIC",s:60},{n:"ARABIC",s:31},{n:"BIO",s:12},{n:"CHEM",s:52},{n:"MATH",s:78},{n:"ENG",s:13},{n:"B/S",s:45},{n:"ICT",s:71},{n:"SOM",s:28}] },}:
-
+        "SM261000": { n: "Faadumo Ibraahim Jaamac", c: "FORM3", s: "SULDAN MUBARAK", p: false, t: 804, a: 80.4, g: "B+", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:81},{n:"BIO",s:70},{n:"CHEM",s:56},{n:"PHY",s:73},{n:"MATH",s:90},{n:"ENG",s:79},{n:"B/S",s:70},{n:"ICT",s:100},{n:"SOM",s:100}] },
+        "SM261001": { n: "Siddiiq Xuseen Axmed", c: "FORM3", s: "SULDAN MUBARAK", p: false, t: 778, a: 77.8, g: "B", sb: [{n:"ISLAMIC",s:80},{n:"ARABIC",s:76},{n:"BIO",s:80},{n:"CHEM",s:78},{n:"PHY",s:76},{n:"MATH",s:70},{n:"ENG",s:71},{n:"B/S",s:61},{n:"ICT",s:88},{n:"SOM",s:98}] },
+        "SM261002": { n: "C/laahi Khaalid Khaliil", c: "FORM3", s: "SULDAN MUBARAK", p: false, t: 771, a: 77.1, g: "B", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:70},{n:"BIO",s:61},{n:"CHEM",s:54},{n:"PHY",s:71},{n:"MATH",s:85},{n:"ENG",s:81},{n:"B/S",s:74},{n:"ICT",s:100},{n:"SOM",s:90}] },
+        "SM261003": { n: "Asiyo Siciid Yaasiin", c: "FORM3", s: "SULDAN MUBARAK", p: false, t: 726, a: 72.6, g: "B-", sb: [{n:"ISLAMIC",s:80},{n:"ARABIC",s:80},{n:"BIO",s:45},{n:"CHEM",s:55},{n:"PHY",s:65},{n:"MATH",s:60},{n:"ENG",s:85},{n:"B/S",s:66},{n:"ICT",s:92},{n:"SOM",s:98}] },
+        "SM261004": { n: "Maxamuud Cabdi Caydiid", c: "FORM3", s: "SULDAN MUBARAK", p: true, t: 657, a: 65.7, g: "C+", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:77},{n:"BIO",s:20},{n:"CHEM",s:18},{n:"PHY",s:50},{n:"MATH",s:98},{n:"ENG",s:83},{n:"B/S",s:62},{n:"ICT",s:70},{n:"SOM",s:94}] },
+        "SM261005": { n: "C/laahi Cabdi Caydiid", c: "FORM3", s: "SULDAN MUBARAK", p: true, t: 600, a: 60.0, g: "C", sb: [{n:"ISLAMIC",s:60},{n:"ARABIC",s:76},{n:"BIO",s:23},{n:"CHEM",s:21},{n:"PHY",s:46},{n:"MATH",s:52},{n:"ENG",s:77},{n:"B/S",s:73},{n:"ICT",s:76},{n:"SOM",s:96}] },
+        "SM261006": { n: "FAADUMO C/QAADIR MAXAMED", c: "FORM2", s: "SULDAN MUBARAK", p: false, t: 1030, a: 93.6, g: "A", sb: [{n:"ISLAMIC",s:100},{n:"ARABIC",s:90},{n:"BIO",s:91},{n:"CHEM",s:85},{n:"PHY",s:95},{n:"MATH",s:100},{n:"ENG",s:79},{n:"B/S",s:97},{n:"ICT",s:99},{n:"SOM",s:94}] },
+        "SM261007": { n: "C/NAASIR KHAALID KHALIIL", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 1023, a: 93.0, g: "A", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:86},{n:"BIO",s:89},{n:"CHEM",s:89},{n:"PHY",s:96},{n:"MATH",s:100},{n:"ENG",s:82},{n:"B/S",s:99},{n:"ICT",s:97},{n:"SOM",s:100}] },
+        "SM261008": { n: "CAISHO CABDI C/LAAHI", c: "FORM2", s: "SULDAN MUBARAK", p: false, t: 980, a: 89.1, g: "A-", sb: [{n:"ISLAMIC",s:90},{n:"ARABIC",s:94},{n:"BIO",s:87},{n:"CHEM",s:90},{n:"PHY",s:96},{n:"MATH",s:100},{n:"ENG",s:69},{n:"B/S",s:79},{n:"ICT",s:75},{n:"SOM",s:100}] },
+        "SM261009": { n: "ANIISO MAWLIID FAARAH", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 976, a: 88.7, g: "A-", sb: [{n:"ISLAMIC",s:90},{n:"ARABIC",s:85},{n:"BIO",s:71},{n:"CHEM",s:84},{n:"PHY",s:99},{n:"MATH",s:98},{n:"ENG",s:63},{n:"B/S",s:89},{n:"ICT",s:97},{n:"SOM",s:100}] },
+        "SM261010": { n: "CAISHO FUAD CABDI", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 877, a: 79.7, g: "B", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:85},{n:"BIO",s:60},{n:"CHEM",s:65},{n:"PHY",s:87},{n:"MATH",s:100},{n:"ENG",s:61},{n:"B/S",s:81},{n:"ICT",s:95},{n:"SOM",s:69}] },
+        "SM261011": { n: "ASMAA AXMED YASIIN", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 861, a: 78.3, g: "B", sb: [{n:"ISLAMIC",s:50},{n:"ARABIC",s:83},{n:"BIO",s:70},{n:"CHEM",s:84},{n:"PHY",s:87},{n:"MATH",s:88},{n:"ENG",s:57},{n:"B/S",s:87},{n:"ICT",s:79},{n:"SOM",s:83}] },
+        "SM261012": { n: "CAISHO C/QAADIR YASIIN", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 771, a: 70.1, g: "B-", sb: [{n:"ISLAMIC",s:90},{n:"ARABIC",s:85},{n:"BIO",s:58},{n:"CHEM",s:71},{n:"PHY",s:67},{n:"MATH",s:70},{n:"ENG",s:55},{n:"B/S",s:65},{n:"ICT",s:71},{n:"SOM",s:69}] },
+        "SM261013": { n: "BADRIYO CUMAR XAASHI", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 750, a: 68.2, g: "C+", sb: [{n:"ISLAMIC",s:75},{n:"ARABIC",s:85},{n:"BIO",s:60},{n:"CHEM",s:46},{n:"PHY",s:85},{n:"MATH",s:72},{n:"ENG",s:63},{n:"B/S",s:55},{n:"ICT",s:79},{n:"SOM",s:55}] },
+        "SM261014": { n: "NAFISO BAASHI AXMED", c: "FORM2", s: "SULDAN MUBARAK", p: true, t: 723, a: 65.7, g: "C+", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:82},{n:"BIO",s:40},{n:"CHEM",s:50},{n:"PHY",s:71},{n:"MATH",s:82},{n:"ENG",s:45},{n:"B/S",s:65},{n:"ICT",s:79},{n:"SOM",s:47}] }
+    };
 
     function eeg() {
         const val = document.getElementById("roll").value.trim().toUpperCase();
-        
         document.getElementById("p1").classList.remove("active");
         document.getElementById("p2").classList.add("active");
-        
-        const info = document.getElementById("info");
-        const cont = document.getElementById("content");
-        
-        info.innerHTML = "";
-        cont.innerHTML = "";
+        const info = document.getElementById("info"), cont = document.getElementById("content");
+        info.innerHTML = ""; cont.innerHTML = "";
 
-        // 1. Hubi haddii Roll Number-ku khaldan yahay
         if (val === "" || !db[val]) {
             cont.innerHTML = `<div class="alert">ROLL NUMBER-KU WAA KHALDANYAHAY FADLAN HUBI.</div>`;
             return;
         }
-
         const st = db[val];
-
-        // 2. Hubi haddii lacagtu ku taagantahay (Xayiraad guud oo magaca ah)
-        if (!st.pay) {
+        if (!st.p) {
             cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.</div>`;
             return;
         }
 
-        // 3. Muuji xogta ardayga haddii wax walba sax yihiin
-        info.innerHTML = `
-            <div class="result-header">
-                <h2>Ardayga: ${st.name}</h2>
-                <p><strong>Roll Number:</strong> ${val}</p>
-                <p><strong>Fasalka:</strong> ${st.class}</p>
-                <p><strong>Iskuulka:</strong> ${st.school}</p>
-            </div>
-        `;
-
+        info.innerHTML = `<div class="result-header"><h2>Ardayga: ${st.n}</h2><p><strong>Roll Number:</strong> ${val} | <strong>Fasalka:</strong> ${st.c} | <strong>Iskuulka:</strong> ${st.s}</p></div>`;
         let html = `<table><tr><th>Maaddo</th><th>Dhibco</th><th>Maaddo</th><th>Dhibco</th></tr>`;
-        for (let i = 0; i < st.subs.length; i += 2) {
-            let s1 = st.subs[i], s2 = st.subs[i+1] || {n:"-",s:"-"};
+        for (let i = 0; i < st.sb.length; i += 2) {
+            let s1 = st.sb[i], s2 = st.sb[i+1] || {n:"-",s:"-"};
             html += `<tr><td>${s1.n}</td><td>${s1.s}</td><td>${s2.n}</td><td>${s2.s}</td></tr>`;
         }
-        
-        html += `</table>`;
-        
-        let status = st.avg >= 50 ? "GUDBAY" : "DHACAY";
-        let statusColor = st.avg >= 50 ? "var(--green)" : "var(--red)";
-        
-        cont.innerHTML = html + `
-        <div class="summary">
-            <div><strong>Total:</strong> ${st.total}</div><div><strong>Average:</strong> ${st.avg}%</div>
-            <div><strong>Grade:</strong> ${st.grade}</div><div><strong>Status:</strong> <span style="color:${statusColor};font-weight:bold">${status}</span></div>
-        </div>
-        <div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE</div>`;
+        let status = st.a >= 50 ? "GUDBAY" : "DHACAY";
+        cont.innerHTML = html + `</table><div class="summary">
+            <div><strong>Total:</strong> ${st.t}</div><div><strong>Average:</strong> ${st.a}%</div>
+            <div><strong>Grade:</strong> ${st.g}</div><div><strong>Status:</strong> <span style="color:${st.a>=50?'var(--green)':'var(--red)'};font-weight:bold">${status}</span></div>
+        </div><div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE</div>`;
     }
 
     function back() {
