@@ -47,28 +47,31 @@
 </div>
 
 <script>
-    // Database-ka ardayda (Halkaan ku dar dhammaan xogta iskuulka)
+    // Xogta rasmiga ah ee 6-da arday ee laga soo minguuriyey dukumentigaaga
     const db = {
-        "BEB01": { 
-            name: "Maxamed Cabdi Cali", 
-            class: "Foom 4aad - A", 
-            school: "Biile Secondary School", 
-            pay: true, 
-            subs: [{n:"Xisaab",s:88},{n:"Ingiriis",s:75},{n:"Carabi",s:90},{n:"Fiisigis",s:82},{n:"Kimisteri",s:79},{n:"Soomaali",s:95}] 
+        "SM261000": { 
+            name: "Faadumo Ibraahim Jaamac", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 804, avg: 80.4, grade: "B+",
+            subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:81},{n:"BIO",s:70},{n:"CHEM",s:56},{n:"PHY",s:73},{n:"MATH",s:90},{n:"ENG",s:79},{n:"B/S",s:70},{n:"ICT",s:100},{n:"SOM",s:100}] 
         },
-        "BEB02": { 
-            name: "Fadumo Axmed Jaamac", 
-            class: "Foom 4aad - B", 
-            school: "Biile Secondary School", 
-            pay: false, 
-            subs: [{n:"Xisaab",s:92},{n:"Ingiriis",s:88},{n:"Carabi",s:85},{n:"Fiisigis",s:91},{n:"Kimisteri",s:84},{n:"Soomaali",s:89}] 
+        "SM261001": { 
+            name: "Siddiiq Xuseen Axmed", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 778, avg: 77.8, grade: "B",
+            subs: [{n:"ISLAMIC",s:80},{n:"ARABIC",s:76},{n:"BIO",s:80},{n:"CHEM",s:78},{n:"PHY",s:76},{n:"MATH",s:70},{n:"ENG",s:71},{n:"B/S",s:61},{n:"ICT",s:88},{n:"SOM",s:98}] 
         },
-        "BEB03": { 
-            name: "Xasan Cumar Maxamuud", 
-            class: "Foom 3aad - A", 
-            school: "Horseed Academy", 
-            pay: true, 
-            subs: [{n:"Xisaab",s:45},{n:"Ingiriis",s:40},{n:"Carabi",s:42},{n:"Fiisigis",s:38},{n:"Kimisteri",s:48},{n:"Soomaali",s:50}] // Ardaygan wuu dhacay
+        "SM261002": { 
+            name: "C/laahi Khaalid Khaliil", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 771, avg: 77.1, grade: "B",
+            subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:70},{n:"BIO",s:61},{n:"CHEM",s:54},{n:"PHY",s:71},{n:"MATH",s:85},{n:"ENG",s:81},{n:"B/S",s:74},{n:"ICT",s:100},{n:"SOM",s:90}] 
+        },
+        "SM261003": { 
+            name: "Asiyo Siciid Yaasiin", class: "FORM3", school: "SULDAN MUBARAK", pay: false, total: 726, avg: 72.6, grade: "B-",
+            subs: [{n:"ISLAMIC",s:80},{n:"ARABIC",s:80},{n:"BIO",s:45},{n:"CHEM",s:55},{n:"PHY",s:65},{n:"MATH",s:60},{n:"ENG",s:85},{n:"B/S",s:66},{n:"ICT",s:92},{n:"SOM",s:98}] 
+        },
+        "SM261004": { 
+            name: "Maxamuud Cabdi Caydiid", class: "FORM3", school: "SULDAN MUBARAK", pay: true, total: 657, avg: 65.7, grade: "C+",
+            subs: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:77},{n:"BIO",s:20},{n:"CHEM",s:18},{n:"PHY",s:50},{n:"MATH",s:98},{n:"ENG",s:83},{n:"B/S",s:62},{n:"ICT",s:70},{n:"SOM",s:94}] 
+        },
+        "SM261005": { 
+            name: "C/laahi Cabdi Caydiid", class: "FORM3", school: "SULDAN MUBARAK", pay: true, total: 600, avg: 60.0, grade: "C",
+            subs: [{n:"ISLAMIC",s:60},{n:"ARABIC",s:76},{n:"BIO",s:23},{n:"CHEM",s:21},{n:"PHY",s:46},{n:"MATH",s:52},{n:"ENG",s:77},{n:"B/S",s:73},{n:"ICT",s:76},{n:"SOM",s:96}] 
         }
     };
 
@@ -84,6 +87,7 @@
         info.innerHTML = "";
         cont.innerHTML = "";
 
+        // 1. Hubi haddii Roll Number-ku khaldan yahay
         if (val === "" || !db[val]) {
             cont.innerHTML = `<div class="alert">ROLL NUMBER-KU WAA KHALDANYAHAY FADLAN HUBI.</div>`;
             return;
@@ -91,11 +95,13 @@
 
         const st = db[val];
 
+        // 2. Hubi haddii lacagtu ku taagantahay (Xayiraad guud oo magaca ah)
         if (!st.pay) {
             cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.</div>`;
             return;
         }
 
+        // 3. Muuji xogta ardayga haddii wax walba sax yihiin
         info.innerHTML = `
             <div class="result-header">
                 <h2>Ardayga: ${st.name}</h2>
@@ -106,24 +112,20 @@
         `;
 
         let html = `<table><tr><th>Maaddo</th><th>Dhibco</th><th>Maaddo</th><th>Dhibco</th></tr>`;
-        let tot = 0;
         for (let i = 0; i < st.subs.length; i += 2) {
             let s1 = st.subs[i], s2 = st.subs[i+1] || {n:"-",s:"-"};
             html += `<tr><td>${s1.n}</td><td>${s1.s}</td><td>${s2.n}</td><td>${s2.s}</td></tr>`;
-            tot += s1.s + (typeof s2.s === 'number' ? s2.s : 0);
         }
         
-        let avg = (tot / st.subs.length).toFixed(1);
-        let gr = avg>=90?"A+":avg>=80?"A":avg>=70?"B":avg>=60?"C":avg>=50?"D":"F";
+        html += `</table>`;
         
-        // Habka cusub ee badalka GUDBAY iyo DHACAY
-        let status = avg >= 50 ? "GUDBAY" : "DHACAY";
-        let statusColor = avg >= 50 ? "var(--green)" : "var(--red)";
+        let status = st.avg >= 50 ? "GUDBAY" : "DHACAY";
+        let statusColor = st.avg >= 50 ? "var(--green)" : "var(--red)";
         
-        cont.innerHTML = html + `</table>
+        cont.innerHTML = html + `
         <div class="summary">
-            <div><strong>Total:</strong> ${tot}</div><div><strong>Average:</strong> ${avg}%</div>
-            <div><strong>Grade:</strong> ${gr}</div><div><strong>Status:</strong> <span style="color:${statusColor};font-weight:bold">${status}</span></div>
+            <div><strong>Total:</strong> ${st.total}</div><div><strong>Average:</strong> ${st.avg}%</div>
+            <div><strong>Grade:</strong> ${st.grade}</div><div><strong>Status:</strong> <span style="color:${statusColor};font-weight:bold">${status}</span></div>
         </div>
         <div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE</div>`;
     }
