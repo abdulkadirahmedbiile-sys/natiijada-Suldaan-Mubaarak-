@@ -47,7 +47,7 @@
 </div>
 
 <script>
-    // Database-ka ardayda (Halkaan waxaad ku dhex qori kartaa dhamaan ardayda iskuulka)
+    // Database-ka ardayda (Halkaan ku dar dhammaan xogta iskuulka)
     const db = {
         "BEB01": { 
             name: "Maxamed Cabdi Cali", 
@@ -60,7 +60,7 @@
             name: "Fadumo Axmed Jaamac", 
             class: "Foom 4aad - B", 
             school: "Biile Secondary School", 
-            pay: false, // Lacagta waa laga xayiray
+            pay: false, 
             subs: [{n:"Xisaab",s:92},{n:"Ingiriis",s:88},{n:"Carabi",s:85},{n:"Fiisigis",s:91},{n:"Kimisteri",s:84},{n:"Soomaali",s:89}] 
         },
         "BEB03": { 
@@ -68,7 +68,7 @@
             class: "Foom 3aad - A", 
             school: "Horseed Academy", 
             pay: true, 
-            subs: [{n:"Xisaab",s:45},{n:"Ingiriis",s:50},{n:"Carabi",s:62},{n:"Fiisigis",s:48},{n:"Kimisteri",s:55},{n:"Soomaali",s:70}] 
+            subs: [{n:"Xisaab",s:45},{n:"Ingiriis",s:40},{n:"Carabi",s:42},{n:"Fiisigis",s:38},{n:"Kimisteri",s:48},{n:"Soomaali",s:50}] // Ardaygan wuu dhacay
         }
     };
 
@@ -84,7 +84,6 @@
         info.innerHTML = "";
         cont.innerHTML = "";
 
-        // 1. HUBI HADDII ROLL NUMBER-KU KHALDAN YAHAY
         if (val === "" || !db[val]) {
             cont.innerHTML = `<div class="alert">ROLL NUMBER-KU WAA KHALDANYAHAY FADLAN HUBI.</div>`;
             return;
@@ -92,13 +91,11 @@
 
         const st = db[val];
 
-        // 2. HUBI JIRITAANKA LACAGTA (Xayiraad)
         if (!st.pay) {
             cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.</div>`;
             return;
         }
 
-        // 3. SOO SAAR NATIIJADA IYO MACLUUMAADKA (Magaca, Roll No, Class, iyo Iskuulka)
         info.innerHTML = `
             <div class="result-header">
                 <h2>Ardayga: ${st.name}</h2>
@@ -118,12 +115,15 @@
         
         let avg = (tot / st.subs.length).toFixed(1);
         let gr = avg>=90?"A+":avg>=80?"A":avg>=70?"B":avg>=60?"C":avg>=50?"D":"F";
-        let status = avg >= 50 ? "GUDBAY" : "HARAY";
+        
+        // Habka cusub ee badalka GUDBAY iyo DHACAY
+        let status = avg >= 50 ? "GUDBAY" : "DHACAY";
+        let statusColor = avg >= 50 ? "var(--green)" : "var(--red)";
         
         cont.innerHTML = html + `</table>
         <div class="summary">
             <div><strong>Total:</strong> ${tot}</div><div><strong>Average:</strong> ${avg}%</div>
-            <div><strong>Grade:</strong> ${gr}</div><div><strong>Status:</strong> <span style="color:${avg>=50?'var(--green)':'var(--red)'};font-weight:bold">${status}</span></div>
+            <div><strong>Grade:</strong> ${gr}</div><div><strong>Status:</strong> <span style="color:${statusColor};font-weight:bold">${status}</span></div>
         </div>
         <div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE</div>`;
     }
