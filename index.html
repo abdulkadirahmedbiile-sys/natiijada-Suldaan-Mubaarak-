@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEB Portal</title>
+    <title>BIILE EXAMINATION BOARD  (BEB)</title>
     <style>
         :root { --blue: #0056b3; --green: #28a745; --red: #dc3545; --white: #fff; }
         * { box-sizing: border-box; font-family: sans-serif; margin: 0; padding: 0; }
@@ -33,7 +33,7 @@
         <img src="Logo.jpeg" alt="BEB LOGO">
         <h1>BIILE EXAMINATION BOARD (BEB)</h1>
         <input type="text" id="roll" placeholder="Geli Roll Number-ka">
-        <button class="btn" onclick="eeg()">HEL EEG NATIIJADA</button>
+        <button class="btn" onclick="eeg()">HEL NATIIJADA</button>
     </div>
 
     <!-- BOGGA 2AAD -->
@@ -58,7 +58,7 @@
     function eeg() {
         const val = document.getElementById("roll").value.trim().toUpperCase();
         const st = db[val];
-        if (!st) return alert("Roll Number-kaas lama helin!");
+        if (!st) return alert("Roll Number-kaas waa khalad!");
 
         // U gudub Bogga 2aad
         document.getElementById("p1").classList.remove("active");
@@ -73,7 +73,7 @@
 
         // 1. HUBI JIRITAANKA LACAGTA (Haddii aanu bixin - Magac iyo Xog midna ma arkayo)
         if (!st.pay) {
-            cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.</div>`;
+            cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.ARDAY LACAG LAGU LEEYAHAY LOOMA OGOLA NATIIJADA</div>`;
             return;
         }
 
@@ -97,7 +97,7 @@
             <div><strong>Total:</strong> ${tot}</div><div><strong>Average:</strong> ${avg}%</div>
             <div><strong>Grade:</strong> ${gr}</div><div><strong>Status:</strong> <span style="color:${avg>=50?'var(--green)':'var(--red)'};font-weight:bold">${status}</span></div>
         </div>
-        <div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE</div>`;
+        <div class="chairman">GUDOOMIYAHA GUDIGA IMTIXAANAADKA : ENG AHMED BIILE.</div>`;
     }
 
     function back() {
