@@ -23,19 +23,58 @@
         .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #eef2f7; padding: 15px; border-radius: 8px; border-left: 5px solid var(--green); text-align: left; font-size: 15px; }
         .chairman { background: #fff; padding: 12px; border: 1px dashed var(--blue); border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; color: #1b3a4b; margin-top: 15px; }
         .alert { background: #f8d7da; color: var(--red); border: 2px dashed var(--red); padding: 30px; border-radius: 8px; font-weight: bold; font-size: 18px; margin-bottom: 15px; }
+        
+        /* Naqshadda Saacadda Countdown-ka */
+        .countdown-box { background: #eef2f7; padding: 25px; border-radius: 8px; border: 1px solid #cbd5e1; margin-top: 15px; }
+        .timer { font-size: 26px; font-weight: bold; color: var(--blue); margin-top: 15px; letter-spacing: 1px; }
+        .timer-msg { font-size: 15px; color: var(--red); font-weight: bold; line-height: 1.5; }
     </style>
 </head>
 <body>
 <div class="card">
-    <div id="p1" class="page active">
+    <!-- BOGGA COUNTDOWN-KA -->
+    <div id="lockPage" class="page active">
+        <img src="Logo.jpeg" alt="BEB LOGO">
+        <h1>BIILE EXAMINATION BOARD (BEB)</h1>
+        <div class="countdown-box">
+            <p class="timer-msg">Weli lama gaarin xilligii natiijada la arki lahaa waxaa la arki doonaa 29 Julay 2026 12:00PM duhurnimo.</p>
+            <div id="countdownTimer" class="timer">Soo raryaa...</div>
+        </div>
+    </div>
+
+    <!-- BOGGA 1AAD (FOOMKA RAADINTA) -->
+    <div id="p1" class="page">
         <img src="Logo.jpeg" alt="BEB LOGO">
         <h1>BIILE EXAMINATION BOARD (BEB)</h1>
         <input type="text" id="roll" placeholder="Geli Roll Number-ka">
         <button class="btn" onclick="eeg()">HEL NATIIJADA</button>
     </div>
+    <!-- BOGGA 2AAD -->
     <div id="p2" class="page"><div id="info"></div><div id="content"></div><button class="btn btn-back" onclick="back()">KU NOQO BOGGA HORE</button></div>
 </div>
 <script>
+    // WAQTIGA FURITAANKA RASMIGA AH: 29 July 2026 saacada 12:00:00 (Duhurnimo)
+    const openDate = new Date("July 29, 2026 12:00:00").getTime();
+
+    const timerInterval = setInterval(function() {
+        const now = new Date().getTime();
+        const timeLeft = openDate - now;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("countdownTimer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        // MARKU WAQTIGU GAARO: Si toos ah u fura foomka raadinta
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("lockPage").classList.remove("active");
+            document.getElementById("p1").classList.add("active");
+        }
+    }, 1000);
+
     const db = {
         // FORM 3: Waxay leeyihiin Business (B/S) - Ma laha Geo & History
         "SM261000": { n: "Faadumo Ibraahim Jaamac", c: "FORM3", s: "SULDAN MUBARAK", p: true, t: 804, a: 80.4, g: "B+", sb: [{n:"ISLAMIC",s:85},{n:"ARABIC",s:81},{n:"BIO",s:70},{n:"CHEM",s:56},{n:"PHY",s:73},{n:"MATH",s:90},{n:"ENG",s:79},{n:"B/S",s:70},{n:"ICT",s:100},{n:"SOM",s:100}] },
