@@ -15,7 +15,9 @@
         input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; margin-bottom: 15px; text-align: center; }
         .btn { width: 100%; padding: 12px; background: var(--blue); color: var(--white); border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
         .btn-back { background: #6c757d; margin-top: 15px; }
-        .result-header { background: linear-gradient(135deg, var(--blue), var(--green)); color: var(--white); padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
+        .result-header { background: linear-gradient(135deg, var(--blue), var(--green)); color: var(--white); padding: 18px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
+        .result-header h2 { font-size: 18px; margin-bottom: 5px; }
+        .result-header p { font-size: 14px; opacity: 0.95; margin-bottom: 3px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: var(--white); text-align: left; }
         th { background: var(--blue); color: var(--white); padding: 10px; border: 1px solid #dee2e6; }
         td { padding: 10px; border: 1px solid #dee2e6; }
@@ -45,19 +47,34 @@
 </div>
 
 <script>
+    // Database-ka ardayda (Halkaan waxaad ku dhex qori kartaa dhamaan ardayda iskuulka)
     const db = {
-        "BEB01": { name: "Maxamed Cabdi Cali", pay: true, subs: [{n:"Xisaab",s:88},{n:"Ingiriis",s:75},{n:"Carabi",s:90},{n:"Fiisigis",s:82},{n:"Kimisteri",s:79},{n:"Soomaali",s:95}] },
-        "BEB02": { name: "Fadumo Axmed Jaamac", pay: false, subs: [{n:"Xisaab",s:92},{n:"Ingiriis",s:88},{n:"Carabi",s:85},{n:"Fiisigis",s:91},{n:"Kimisteri",s:84},{n:"Soomaali",s:89}] },
-        "BEB03": { name: "Xasan Cumar Maxamuud", pay: true, subs: [{n:"Xisaab",s:45},{n:"Ingiriis",s:50},{n:"Carabi",s:62},{n:"Fiisigis",s:48},{n:"Kimisteri",s:55},{n:"Soomaali",s:70}] },
-        "BEB04": { name: "Caasha Cilmi Yuusuf", pay: true, subs: [{n:"Xisaab",s:98},{n:"Ingiriis",s:95},{n:"Carabi",s:97},{n:"Fiisigis",s:94},{n:"Kimisteri",s:96},{n:"Soomaali",s:99}] },
-        "BEB05": { name: "Cabdullaahi Yaasiin", pay: false, subs: [{n:"Xisaab",s:60},{n:"Ingiriis",s:58},{n:"Carabi",s:70},{n:"Fiisigis",s:65},{n:"Kimisteri",s:62},{n:"Soomaali",s:74}] },
-        "BEB06": { name: "Yasmine Siciid Ciise", pay: true, subs: [{n:"Xisaab",s:72},{n:"Ingiriis",s:81},{n:"Carabi",s:78},{n:"Fiisigis",s:85},{n:"Kimisteri",s:80},{n:"Soomaali",s:88}] }
+        "BEB01": { 
+            name: "Maxamed Cabdi Cali", 
+            class: "Foom 4aad - A", 
+            school: "Biile Secondary School", 
+            pay: true, 
+            subs: [{n:"Xisaab",s:88},{n:"Ingiriis",s:75},{n:"Carabi",s:90},{n:"Fiisigis",s:82},{n:"Kimisteri",s:79},{n:"Soomaali",s:95}] 
+        },
+        "BEB02": { 
+            name: "Fadumo Axmed Jaamac", 
+            class: "Foom 4aad - B", 
+            school: "Biile Secondary School", 
+            pay: false, // Lacagta waa laga xayiray
+            subs: [{n:"Xisaab",s:92},{n:"Ingiriis",s:88},{n:"Carabi",s:85},{n:"Fiisigis",s:91},{n:"Kimisteri",s:84},{n:"Soomaali",s:89}] 
+        },
+        "BEB03": { 
+            name: "Xasan Cumar Maxamuud", 
+            class: "Foom 3aad - A", 
+            school: "Horseed Academy", 
+            pay: true, 
+            subs: [{n:"Xisaab",s:45},{n:"Ingiriis",s:50},{n:"Carabi",s:62},{n:"Fiisigis",s:48},{n:"Kimisteri",s:55},{n:"Soomaali",s:70}] 
+        }
     };
 
     function eeg() {
         const val = document.getElementById("roll").value.trim().toUpperCase();
         
-        // U gudub Bogga 2aad si kasta oo ay xaaladdu tahay
         document.getElementById("p1").classList.remove("active");
         document.getElementById("p2").classList.add("active");
         
@@ -75,14 +92,21 @@
 
         const st = db[val];
 
-        // 2. HUBI JIRITAANKA LACAGTA (Haddii aanu bixin)
+        // 2. HUBI JIRITAANKA LACAGTA (Xayiraad)
         if (!st.pay) {
             cont.innerHTML = `<div class="alert">FADLAN ISKA BIXI LACAGTA KUGU TAAGAN.</div>`;
             return;
         }
 
-        // 3. HADDII ROLL NUMBER-KU SAX YAHAY, LACAGTIINA LA BIXIYEEY
-        info.innerHTML = `<div class="result-header"><h2>Ardayga: ${st.name}</h2><p>Roll Number: ${val}</p></div>`;
+        // 3. SOO SAAR NATIIJADA IYO MACLUUMAADKA (Magaca, Roll No, Class, iyo Iskuulka)
+        info.innerHTML = `
+            <div class="result-header">
+                <h2>Ardayga: ${st.name}</h2>
+                <p><strong>Roll Number:</strong> ${val}</p>
+                <p><strong>Fasalka:</strong> ${st.class}</p>
+                <p><strong>Iskuulka:</strong> ${st.school}</p>
+            </div>
+        `;
 
         let html = `<table><tr><th>Maaddo</th><th>Dhibco</th><th>Maaddo</th><th>Dhibco</th></tr>`;
         let tot = 0;
