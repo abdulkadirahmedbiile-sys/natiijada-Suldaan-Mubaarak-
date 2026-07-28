@@ -98,7 +98,7 @@
             let s1 = st.sb[i], s2 = st.sb[i+1] || {n:"-",s:"-"};
             html += `<tr><td>${s1.n}</td><td>${s1.s}</td><td>${s2.n}</td><td>${s2.s}</td></tr>`;
         }
-        let status = st.a >= 50 ? "GUDBAY" : "DHACAY";
+        let status = st.a > 40 ? "GUDBAY" : "DHACAY";
         cont.innerHTML = html + `</table><div class="summary">
             <div>--------------------<br><strong>Total:</strong> ${st.t}</div><div>--------------------<br><strong>Average:</strong> ${st.a}%</div>
             <div><strong>Grade:</strong> ${st.g}</div><div><strong>Status:</strong> <span style="color:${st.a>=50?'var(--green)':'var(--red)'};font-weight:bold">${status}</span></div>
