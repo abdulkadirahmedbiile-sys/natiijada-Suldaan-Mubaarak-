@@ -37,7 +37,8 @@
         <img src="Logo.jpeg" alt="BEB LOGO">
         <h1>BIILE EXAMINATION BOARD (BEB)</h1>
         <div class="countdown-box">
-            <p class="timer-msg">Weli lama gaarin xilligii natiijada la arki lahaa waxaa la arki doonaa 31 Julay 2026 10:30PM subaxnimo.</p>
+            <!-- Qoraalka fariinta oo loo saxay 10:55 AM subaxnimo -->
+            <p class="timer-msg">Weli lama gaarin xilligii natiijada la arki lahaa waxaa la arki doonaa 31 Julay 2026 10:55AM subaxnimo.</p>
             <div id="countdownTimer" class="timer">Soo raryaa...</div>
         </div>
     </div>
@@ -53,8 +54,8 @@
     <div id="p2" class="page"><div id="info"></div><div id="content"></div><button class="btn btn-back" onclick="back()">KU NOQO BOGGA HORE</button></div>
 </div>
 <script>
-    // WAQTIGA FURITAANKA RASMIGA AH: 29 July 2026 saacada 12:00:00 (Duhurnimo)
-    const openDate = new Date("July 29, 2026 12:00:00").getTime();
+    // WAQTIGA FURITAANKA RASMIGA AH: 31 July 2026 saacada 10:55:00 (Subaxnimo)
+    const openDate = new Date("July 31, 2026 10:55:00").getTime();
 
     const timerInterval = setInterval(function() {
         const now = new Date().getTime();
