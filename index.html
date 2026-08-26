@@ -38,7 +38,7 @@
         <h1>BIILE EXAMINATION BOARD (BEB) Academic year 2025-2026</h1>
         <div class="countdown-box">
             <!-- Qoraalka fariinta oo loo saxay 12:00 pm -->
-            <p class="timer-msg">Shaacinta  natiijada Iskuulka suldan mubarak waxaa ka haray ... .</p>
+            <p class="timer-msg">Shaacinta  natiijada Iskuulka suldan mubarak waxaa la arki karaa 26 june 2026 13:00pm Duhurnimo. waxaa ka haray ... .</p>
             <div id="countdownTimer" class="timer"> Raadin...</div>
         </div>
     </div>
@@ -55,7 +55,7 @@
 </div>
 <script>
     // WAQTIGA FURITAANKA RASMIGA AH: 26 August 2026  saacada 12:00:00 (Subaxnimo)
-    const openDate = new Date("26 August 2026  12:30:00").getTime();
+    const openDate = new Date("26 August 2026  13:00:00").getTime();
 
     const timerInterval = setInterval(function() {
         const now = new Date().getTime();
@@ -66,7 +66,7 @@
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-        document.getElementById("countdownTimer").innerHTML = days + "Maalin " + hours + "Saacad " + minutes + "daqiiqad " + seconds + "ilbiriqsi ";
+        document.getElementById("countdownTimer").innerHTML = days + "Maalin " + hours + " Saac " + minutes + "daqiiqad " + seconds + "ilbiriqsi ";
 
         // MARKU WAQTIGU GAARO: Si toos ah u fura foomka raadinta
         if (timeLeft <= 0) {
